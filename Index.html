@@ -9,6 +9,13 @@
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
+    <script type=”text/javascript” src=”http://www.ncbi.nlm.nih.gov/projects/sviewer/js/sviewer.js”></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,7 +33,6 @@
                     <li role="presentation"><a href="#">Blast</a></li>
                 </ul>
                 <ul class="nav nav-pills nav-justified">
-                    ...
                 </ul>
             </div>
         </header>
@@ -42,7 +48,7 @@
                 </div>
             </div>
             <section class="col-lg-10">
-                Section
+                    <div id=’sv1’></div>
             </section>
         </div>
         <footer class="row">
@@ -52,9 +58,16 @@
         </footer>
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script type='text/javascript'>
+    $(document).ready(function() {
+        SeqViewOnReady(function() {
+            var app = new SeqView.App(‘sv1’);
+            app.load(‘embedded=true&id=nt_011515’);
+        });
+    });
+</script>
+
+
 </body>
 </html>
