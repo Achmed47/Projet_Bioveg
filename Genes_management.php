@@ -8,6 +8,9 @@
         <script src="Web/js/bootstrap.js"></script>
         <script src="Web/js/jquery-3.1.0.js"></script>
     </head>
+    <script>
+
+    </script>
     <?php
         $servername = "localhost";
         $username = "root";
@@ -37,7 +40,7 @@
             <table class="table table-striped table-bordered table-list">
               <thead>
                 <tr>
-                    <th><em class="fa fa-cog"> Tools</em></th>
+                    <th><em class="fa fa-cog"></em>&nbsp; Tools </th>
                     <th class="hidden-xs">ID</th>
                     <th>Accession number</th>
                     <th>Positions</th>
@@ -51,9 +54,9 @@
                         while($row = $result->fetch_assoc()) {
                             ?>
                             <tr>
-                                <td align="center">
-                                  <a class="btn btn-default"><em class="fa fa-pencil"> Modify</em></a>
-                                  <a class="btn btn-danger"><em class="fa fa-trash"> Delete</em></a>
+                                <td align="center" data-id='<?php echo $row["ID"] ?>'>
+                                  <a class="btn btn-default"><em class="fa fa-pencil"></em>&nbsp; Modify</a>
+                                  <a class="btn btn-danger"><em class="fa fa-trash"></em>&nbsp; Delete</a>
                                 </td>
                                 <td class="hidden-xs"><?php echo $row["ID"]; ?></td>
                                 <td><?php echo $row["NUM_ACCESSION"]; ?></td>
@@ -64,7 +67,7 @@
                 </tbody>
             </table>
           </div>
-          <div class="panel-footer">
+          <!--<div class="panel-footer">
             <div class="row">
               <div class="col col-xs-4">Page 1 of 5
               </div>
@@ -82,7 +85,7 @@
                 </ul>
               </div>
             </div>
-          </div>
+          </div>-->
         </div>
     </div>
 </html>
