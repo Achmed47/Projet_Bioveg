@@ -15,8 +15,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-    <script src="JS/sviewer.js" type=”text/javascript” id="autoload"></script>
-
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,14 +51,7 @@
                 </div>
             </div>
             <section class="col-lg-10">
-                    <div class="seqviewer">
-                    <div id='SeqViewer1' style="width:900px;height:800px;border:1px solid red" class="SeqViewerApp">
-                          <a href="?id=89161185&embedded=true&appname=testemb&v=1:247249719 &tracks=[key:graph_track,annots:NA0000016.1|]"></a>
-                    </div>
-                </div>
-                <iframe id="theiframe" width="900" src="embed_iframe.html?iframe=theiframe&amp;embedded=true&amp;id=AC_000020">
-                 <p>Your browser does not support iframes.</p>
-              </iframe>
+
             </section>
         </div>
         <footer class="row">
@@ -73,17 +64,6 @@
             </div>
         </footer>
     </div>
-
-
-<script type='text/javascript'>
-    $(document).ready(function() {
-        $("ul.nav li").click(function() {
-            $("ul.nav li.active").removeClass("active");
-            $(this).addClass("active");
-            console.log($("ul.nav li").size());
-        });
-    });
-</script>
 
 
 </body>
