@@ -6,6 +6,10 @@ $( document ).ready(function() {
 
     $("#genome").click(function(){
         $( "#content" ).load( "Genome_visualization.html" );
+        $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) {
+            console.log("ok");
+        });
+
     });
 
     $("#blast").click(function(){
@@ -16,7 +20,7 @@ $( document ).ready(function() {
         $( "#content" ).load( "Primer.html" );
     });
 
-    $("#managment").click(function(){
+    $("#management").click(function(){
         $( "#content" ).load( "Genes_management.php" );
     });
 });
