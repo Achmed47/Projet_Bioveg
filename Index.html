@@ -55,10 +55,17 @@
 
 <script type='text/javascript'>
     $(document).ready(function() {
-        SeqViewOnReady(function() {
-            var app = new SeqView.App(‘sv1’);
-            app.load(‘embedded=true&id=nt_011515’);
+        $("ul.nav li").click(function() {
+            $("ul.nav li.active").removeClass("active");
+            $(this).addClass("active");
+            console.log($("ul.nav li").size());
         });
+
+
+//        SeqViewOnReady(function() {
+//            var app = new SeqView.App(‘sv1’);
+//            app.load(‘embedded=true&id=nt_011515’);
+//        });
     });
 </script>
 
