@@ -5,70 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Eutypa Lata genome Project</title>
-    <!-- CSS -->
+
     <link href="Web/css/styles.css" rel="stylesheet">
-    <!-- Bootstrap -->
+    <link href="Web/css/track.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <script type=”text/javascript” src=”http://www.ncbi.nlm.nih.gov/projects/sviewer/js/sviewer.js”></script>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="JS/d3.min.js"></script>
+    <script src="JS/d3-tip.js"></script>
+    <script src="JS/core.js"></script>
 
+
+
+
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
     <div class="container">
         <header class="row">
             <div class="col-lg-12">
                 <ul class="nav nav-tabs nav-justified">
-                    <li role="presentation" class="active"><a href="#">Genome Visualization</a></li>
-                    <li role="presentation"><a href="#">Blast</a></li>
-                    <li role="presentation"><a href="#">Primer Calculator</a></li>
-                    <li role="presentation"><a href="#">Genes Management</a></li>
+                    <li role="presentation" class="active" id="genome"><a href="#">Genome Visualization</a></li>
+                    <li role="presentation" id="blast"><a href="#">Blast</a></li>
+                    <li role="presentation" id="primer"><a href="#">Primer Calculator</a></li>
+                    <li role="presentation" id="management"><a href="#">Genes Management</a></li>
                 </ul>
             </div>
         </header>
-        <div class="row">
+        <div class="row" id="content">
             <div class="col-lg-2">
                 <div class="row">
-                    <aside class="col-lg-12" style = "background-color: red">
-                        Aside
-                    </aside>
-                    <aside class="col-lg-12">
-                        Aside
-                    </aside>
                 </div>
             </div>
-            <section class="col-lg-10">
-                    <div id=’sv1’></div>
-            </section>
         </div>
         <footer class="row">
             <div class="col-lg-12">
-                Pied de page
+                <div class="panel panel-default">
+                    <div class="panel footer" style="text-align: center">
+                        Developped by Lopez family
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
 
+    <script type="text/javascript">
+        $( "#content" ).load( "Genome_visualization.html" );
 
-<script type='text/javascript'>
-    $(document).ready(function() {
-        $("ul.nav li").click(function() {
-            $("ul.nav li.active").removeClass("active");
-            $(this).addClass("active");
-            console.log($("ul.nav li").size());
+        $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) {
+            console.log("ok");
         });
+    </script>
 
-
-//        SeqViewOnReady(function() {
-//            var app = new SeqView.App(‘sv1’);
-//            app.load(‘embedded=true&id=nt_011515’);
-//        });
-    });
-</script>
-
-
+    <script type="text/javascript" src="JS/data.js"></script>
+    <script type="text/javascript" src="JS/linearplot.js"></script>
+    <script type="text/javascript" src="JS/linearbrush.js"></script>
 </body>
 </html>
