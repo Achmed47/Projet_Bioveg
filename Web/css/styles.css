@@ -1,23 +1,17 @@
-
 /*navbar*/
 .nav {
   background-color: #8ae73c;
   border-color: black;
+  font-size: 15px;
+  font-weight: ;
+  font-family: Verdana, Geneva, sans-serif;
 }
 
 .nav:hover {
-   background-color: #3aa328;
-}
-
-.nav:focus{
-    color:yellow;
+   background-color: #8ae73c;
 }
 
 }
 .nav  > li > a {
-  color: #f7f9eb;
-}
-.nav > li > a:hover,
-.nav  > li > a:focus {
-  color: #020506;
+  color: #34be3f;
 }
