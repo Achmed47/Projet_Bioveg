@@ -5,7 +5,7 @@ $( document ).ready(function() {
     });
 
     $("#genome").click(function(){
-        $( "#content" ).load( "genome_visualiser.html" );
+        $( "#content" ).load( "Genome_visualization.html" );
     });
 
     $("#blast").click(function(){
