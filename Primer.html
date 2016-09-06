@@ -1,41 +1,38 @@
-<div>
-    <h1> Primer Calculator </h1>
+<h1> Primer Calculator </h1>
 
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Liste de gènes
-        <span class="caret"></span>
-        </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Gene 1</a></li>
-            <li><a href="#">Gene 2 </a></li>
-            <li><a href="#">Gene 2</a></li>
-          </ul>
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Liste de gènes
+    <span class="caret"></span>
+    </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">Gene 1</a></li>
+        <li><a href="#">Gene 2 </a></li>
+        <li><a href="#">Gene 2</a></li>
+      </ul>
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Taille des amorces</span>
+    <input type="number" class="form-control"  aria-describedby="basic-addon1">
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">TM</span>
+    <input type="number" class="form-control"  aria-describedby="basic-addon1">
+</div>
+
+<div class="btn-group" role="group" aria-label="..." id = calculer>
+    <button type="button" class="btn btn-default"> Calculer </button>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Résultat</h3>
     </div>
-
-    <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Taille des amorces</span>
-        <input type="number" class="form-control"  aria-describedby="basic-addon1">
-    </div>
-
-    <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">TM</span>
-        <input type="number" class="form-control"  aria-describedby="basic-addon1">
-    </div>
-
-    <div class="btn-group" role="group" aria-label="..." id = calculer>
-        <button type="button" class="btn btn-default"> Calculer </button>
-    </div>
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Résultat</h3>
-        </div>
-        <div class="panel-body">
-            Amorce 5' 3' =
-            </br>
-            Amorce reverse 5' 3' =
-        </div>
+    <div class="panel-body">
+        Amorce 5' 3' =
+        <br/>
+        Amorce reverse 5' 3' =
     </div>
 </div>
