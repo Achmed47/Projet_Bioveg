@@ -1,3 +1,20 @@
+<head>
+    <link href="Web/css/styles.css" rel="stylesheet">
+    <link href="Web/css/track.css" rel="stylesheet">
+    <link href="Web/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Web/css/bootstrap.css" rel="stylesheet">
+    <link href="Web/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="Web/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <script src="Web/js/jquery-3.1.0.min.js"></script>
+    <script src="Web/js/jquery-3.1.0.js"></script>
+    <script src="Web/js/bootstrap.min.js"></script>
+    <script src="Web/js/bootstrap.js"></script>
+    <script src="Web/js/npm.js"></script>
+    <script src="JS/d3.min.js"></script>
+    <script src="JS/d3-tip.js"></script>
+    <script src="JS/core.js"></script>
+</head>
 <?php
     include("db_connexion.php");
 ?>
