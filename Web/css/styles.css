@@ -15,3 +15,8 @@
 .nav  > li > a {
   color: #34be3f;
 }
+
+.iframe {
+    align : middle;
+    border-color: red;
+}
