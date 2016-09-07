@@ -6,6 +6,8 @@
     <link href="Web/css/bootstrap-theme.css" rel="stylesheet">
     <link href="Web/css/bootstrap-theme.min.css" rel="stylesheet">
 
+    <link href="Web/css/font-awesome.min.css" rel="stylesheet">
+
     <script src="Web/js/jquery-3.1.0.min.js"></script>
     <script src="Web/js/jquery-3.1.0.js"></script>
     <script src="Web/js/bootstrap.min.js"></script>
@@ -30,7 +32,7 @@
     <table class="table table-striped table-bordered table-list">
       <thead>
         <tr>
-            <th><div class="glyphicon glyphicon-cog"> Tools</div></th>
+            <th><p class="fa fa-cog"></p> Tools</th>
             <th class="hidden-xs">ID</th>
             <th>Accession number</th>
             <th>Positions</th>
@@ -45,8 +47,8 @@
                     ?>
                     <tr>
                         <td align="center" data-id='<?php echo $row["ID"] ?>'>
-                          <a class="btn btn-default"><em class="glyphicon glyphicon-pencil"> Modify</em></a>
-                          <a class="btn btn-danger"><em class="glyphicon glyphicon-trash"> Delete</em></a>
+                          <a class="btn btn-default"><em class="fa fa-pencil"></em> Modify</a>
+                          <a class="btn btn-danger"><em class="fa fa-trash"></em> Delete</a>
                         </td>
                         <td class="hidden-xs"><?php echo $row["ID"]; ?></td>
                         <td><?php echo $row["NUM_ACCESSION"]; ?></td>
