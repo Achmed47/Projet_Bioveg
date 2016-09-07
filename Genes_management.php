@@ -1,15 +1,14 @@
 <?php
     include("db_connexion.php");
 ?>
-
+<br>
 <div class="col col-xs-6">
-    <h3 class="panel-title">Panel Heading</h3>
-</div>
-
-<div class="col col-xs-6 text-right">
     <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
 </div>
 
+<div class="col col-xs-6 text-right">
+</div>
+<br>
 <div class="panel-body">
     <table class="table table-striped table-bordered table-list">
       <thead>
@@ -42,7 +41,7 @@
     </table>
 </div>
 
-<div class="panel-footer">
+<!--<div class="panel-footer">
     <div class="row">
           <div class="col col-xs-4">Page 1 of 5</div>
           <div class="col col-xs-8">
@@ -60,4 +59,4 @@
                 </ul>
           </div>
     </div>
-</div>
+</div>-->
