@@ -5,10 +5,11 @@
 <br>
 
 <div class="col col-xs-6">
-    <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+    <h3>Introns and exons</h3>
 </div>
 
 <div class="col col-xs-6 text-right">
+    <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
 </div>
 <br>
 <div class="panel-body">
@@ -17,25 +18,25 @@
         <tr>
             <th><p class="fa fa-cog"></p> Tools</th>
             <th class="hidden-xs">ID</th>
-            <th>Accession number</th>
+            <th>Gene ID</th>
             <th>Positions</th>
             <th>Length</th>
         </tr>
       </thead>
       <tbody>
           <?php
-            $sql = "SELECT * FROM genes";
+            $gene = 1;
+            $sql = "SELECT * FROM `introns_exons` WHERE `GENE`=".$gene." ORDER BY `introns_exons`.`START` ASC";
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     ?>
                     <tr>
                         <td align="center" data-id='<?php echo $row["ID"] ?>'>
-                            <a class="btn btn-success"><em class="glyphicon glyphicon-eye-open"></em> See introns/exons</a>
-                            <a class="btn btn-info"><em class="fa fa-pencil"></em> Modify</a>
-                            <a class="btn btn-danger"><em class="fa fa-trash"></em> Delete</a>
+                          <a class="btn btn-default"><em class="fa fa-pencil"></em> Modify</a>
+                          <a class="btn btn-danger"><em class="fa fa-trash"></em> Delete</a>
                         </td>
                         <td class="hidden-xs"><?php echo $row["ID"]; ?></td>
-                        <td><?php echo $row["NUM_ACCESSION"]; ?></td>
+                        <td><?php echo $row["GENE"]; ?></td>
                         <td><?php echo $row["START"]. ".." . $row["END"]; ?> </td>
                         <td><?php echo ($row["END"] - $row["START"]); ?></td>
                     </tr>
