@@ -30,7 +30,7 @@
     <table class="table table-striped table-bordered table-list">
       <thead>
         <tr>
-            <th><em class="fa fa-cog"> Tools</em></th>
+            <th><div class="glyphicon glyphicon-cog"> Tools</div></th>
             <th class="hidden-xs">ID</th>
             <th>Accession number</th>
             <th>Positions</th>
@@ -45,8 +45,8 @@
                     ?>
                     <tr>
                         <td align="center" data-id='<?php echo $row["ID"] ?>'>
-                          <a class="btn btn-default"><em class="fa fa-pencil"> Modify</em></a>
-                          <a class="btn btn-danger"><em class="fa fa-trash"> Delete</em></a>
+                          <a class="btn btn-default"><em class="glyphicon glyphicon-pencil"> Modify</em></a>
+                          <a class="btn btn-danger"><em class="glyphicon glyphicon-trash"> Delete</em></a>
                         </td>
                         <td class="hidden-xs"><?php echo $row["ID"]; ?></td>
                         <td><?php echo $row["NUM_ACCESSION"]; ?></td>
