@@ -1,4 +1,7 @@
 $( document ).ready(function() {
+    $( "#content" ).load( "Genome_visualization.html" );
+    $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) { });
+
     $("ul.nav li").click(function(){
         $(".active").removeClass("active");
         $(this).addClass("active");
