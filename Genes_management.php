@@ -33,6 +33,7 @@
                         <td align="center" data-id='<?php echo $row["ID"] ?>'>
                           <button class="btn btn-default modifyButton" data-toggle="modal" data-target="#myModal"><em class="fa fa-pencil"></em> Modify</button>
                           <button class="btn btn-danger deleteButton"><em class="fa fa-trash"></em> Delete</button>
+                          <button class="btn btn-success"><em class="glyphicon glyphicon-eye-open"></em>Browse introns/exons</button>
                         </td>
                         <td class="hidden-xs"><?php echo $row["ID"]; ?></td>
                         <td><?php echo $row["NUM_ACCESSION"]; ?></td>

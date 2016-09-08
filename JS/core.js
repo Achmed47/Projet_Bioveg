@@ -16,22 +16,26 @@ $( document ).ready(function() {
     });
 
     $("#blast").click(function(){
-        $( "#content" ).load( "Blast.html" );
+        $("#content" ).load( "Blast.html" );
     });
 
     $("#primer").click(function(){
-        $( "#content" ).load( "Primer.html" );
+        $("#content" ).load( "Primer.html" );
     });
 
     $("#management").click(function(){
-        $( "#content" ).load( "Genes_management.php" );
+        $("#content" ).load( "Genes_management.php" );
     });
 
     $("#protein").click(function(){
-        $( "#content" ).load( "Protein.html" );
+        $("#content" ).load( "Protein.html" );
     });
 
+    $("#btn_number_accession").click(function(){
+        $("#num_access").show();
+    });
 
+    $("#btn_liste_gene").click(function(){
+        $("#list_gene").show();
+    });
 });
-
-

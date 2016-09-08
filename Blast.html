@@ -1,3 +1,44 @@
 <div>
-    Blast
+    <div class="btn-group" role="group" id=button_group_blast>
+      <button type="button" class="btn btn-default" id="btn_number_accession" >N° d'accession spécifique</button>
+      <button type="button" class="btn btn-default" id="btn_liste_gene" >Liste de gènes</button>
+    </div>
+    <div id="num_access" class="input-group"  style="display: none">
+        <input type="text" class="form-control" placeholder="N°d'accession"/>
+    </div>
+    <div id= "list_gene" style="display: none">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Liste de gènes
+                <span class="caret"></span>
+            </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">gène </a></li>
+          </ul>
+        </div>
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Type de Blast
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">blast n</a></li>
+        <li><a href="#">tblast n</a></li>
+        <li><a href="#">blast x</a></li>
+        <li><a href="#">protein blast</a></li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Base de données à Blaster
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a> Genome de l'Ugni Blanc </a></li>
+        <li><a> Genome du Merlot </a></li>
+        <li><a> Genome d'Eutypa Lata </a></li>
+      </ul>
+    </div>
 </div>
+<script src="JS/blast.js"></script>
