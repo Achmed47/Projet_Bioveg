@@ -2,7 +2,7 @@
     include("db/connexion.php");
 ?>
 
-<br>
+<br/>
 
 <div class="col col-xs-6">
     <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
@@ -10,7 +10,7 @@
 
 <div class="col col-xs-6 text-right">
 </div>
-<br>
+<br/>
 <div id="panelBody" class="panel-body">
 
     <table id="geneTable" class="table table-striped table-bordered table-list">
@@ -33,7 +33,7 @@
                         <td align="center" data-id='<?php echo $row["ID"] ?>'>
                           <button class="btn btn-default modifyButton" data-toggle="modal" data-target="#myModal"><em class="fa fa-pencil"></em> Modify</button>
                           <button class="btn btn-danger deleteButton"><em class="fa fa-trash"></em> Delete</button>
-                          <button class="btn btn-success"><em class="glyphicon glyphicon-eye-open"></em>Browse introns/exons</button>
+                          <button class="btn btn-success"><em class="glyphicon glyphicon-eye-open"></em> Browse introns/exons</button>
                         </td>
                         <td class="hidden-xs"><?php echo $row["ID"]; ?></td>
                         <td><?php echo $row["NUM_ACCESSION"]; ?></td>
