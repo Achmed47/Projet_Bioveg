@@ -1,7 +1,10 @@
 $( document ).ready(function() {
+
+    // Loading genome visualization by default
     $( "#content" ).load( "Genome_visualization.html" );
     $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) { });
 
+    // Menu actions
     $("ul.nav li").click(function(){
         $(".active").removeClass("active");
         $(this).addClass("active");
@@ -27,6 +30,7 @@ $( document ).ready(function() {
     $("#protein").click(function(){
         $( "#content" ).load( "Protein.html" );
     });
+
 
 });
 
