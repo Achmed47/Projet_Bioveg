@@ -8,12 +8,29 @@ $(document).ready(function() {
         $("#num_access").hide();
         $("#list_gene").show();
     });
-    console.log($("#num_access").css("display"));
-    $("#start_blast").click(function(){
-//        if $("#num_access").css("display")
-        var N_Accession = $("").text();
-        var Database_blast =$("").text() ;
-        var Type_blast =$("").text() ;
-        var request_html = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?QUERY="+N_Accession+"&DATABASE="+Database_blast+"&PROGRAM="+Type_blast+"&FILTER=L&EXPECT=0.01&FORMAT_TYPE=HTML&NCBI_GI=on&HITLIST_SIZE=10&CMD=Put";
+
+    $("li.liste_dropdown").click(function(){
+        $("dropdownMenu1").val($(this).text()+"<span class=\"caret\"></span>");
     });
+
+    $("li.liste_dropdown_blast").click(function(){
+        $("dropdownMenu2").html($(this).text()+"<span class=\"caret\"></span>");
+    });
+
+    $("#start_blast").click(function(){
+        if ($("#num_access").css("display") != "none"){
+            var N_Accession = $("#special_access_number").text();
+        }
+        else {
+            var N_Accession = $("btn_liste_gene").text();
+        };
+        var Database_blast = $("").text() ;
+        var Type_blast = $("").text();
+        var request_html = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?QUERY="+N_Accession+"&DATABASE="+Database_blast+"&PROGRAM="+Type_blast+"&FILTER=L&EXPECT=0.01&FORMAT_TYPE=HTML&NCBI_GI=on&HITLIST_SIZE=10&CMD=Put";
+
+        console.log(N_Accession + "+" + Database_blast +"+"+ Type_blast);
+
+        window.open(request_html,"_blank");
+    });
+
 });
