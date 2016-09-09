@@ -20,3 +20,15 @@
     align : middle;
     border-color: red;
 }
+
+#pageCounter {
+    position : relative;
+    top : 25px;
+    left: 15px;
+}
+
+#genePositionInputBlock {
+    position:relative;
+    left:16px;
+    width:418px;
+}
