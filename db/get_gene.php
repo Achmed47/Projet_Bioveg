@@ -11,7 +11,7 @@ if(is_numeric($page) && $page > 0 && is_numeric($nbLines) && $nbLines > 0)
     $nbLines = (int) $nbLines;
     $start = ($page-1)*$nbLines;
 
-    $sql = "SELECT * from genes LIMIT $start, $nbLines";
+    $sql = "SELECT * from genes ORDER BY ID LIMIT $start, $nbLines";
     $result = $conn->query($sql);
     $html = "";
 

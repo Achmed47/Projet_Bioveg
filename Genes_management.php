@@ -30,13 +30,13 @@ $print_limit = 10;
         </thead>
         <tbody>
             <?php
-            $sql = "SELECT * FROM genes LIMIT $print_limit";
+            $sql = "SELECT * FROM genes ORDER BY ID LIMIT $print_limit";
             $result = $conn->query($sql);
             while($row = $result->fetch_assoc()) {
             ?>
             <tr class="geneLine" id="lineId<?php echo $row["ID"] ?>">
                 <td align="center" class="geneActions" data-numaccession="<?php echo $row["NUM_ACCESSION"] ?>" data-end="<?php echo $row["END"] ?>"  data-start="<?php echo $row["START"] ?>" data-sequence="<?php echo $row["SEQ"] ?>" data-id='<?php echo $row["ID"] ?>'>
-                    <button class="btn btn-default modifyButton" data-toggle="modal" data-target="#myModal"><em class="fa fa-pencil"></em> Modify</button>
+                    <button id="modifyGene" class="btn btn-default modifyButton" data-toggle="modal" data-target="#myModal"><em class="fa fa-pencil"></em> Modify</button>
                     <button class="btn btn-danger deleteButton"><em class="fa fa-trash"></em> Delete</button>
                     <button class="btn btn-success"><em class="glyphicon glyphicon-eye-open"></em> Browse introns/exons</button>
                 </td>
@@ -90,7 +90,7 @@ $print_limit = 10;
 
             <div class="modal-footer">
                 <button type="button" id="closeModifications" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="confirmModifications" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+                <button type="button" id="confirmModifications" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
