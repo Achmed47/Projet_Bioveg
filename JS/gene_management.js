@@ -26,6 +26,7 @@ $( document ).ready(function() {
         // Delete button
     $("#geneTable").on("click", ".deleteButton", function() {
         id = $(this).parent().data("id");
+        var accessionNumber = $(this).parent().data("numaccession");
 
         $.ajax({
             url  : "db/delete_gene.php",
@@ -36,18 +37,27 @@ $( document ).ready(function() {
             success : function(json_result, status) {
                 if(status == "success" && json_result == "1")
                 {
-                    successAlert("Gene has been deleted.");
+                    successAlert("The gene <b>" + id + " (" + accessionNumber + ")</b> has been deleted.");
                     $("#lineId" + id).remove();
                     updatePagination(true);
                 } else {
-                    failAlert("<strong>Error :</strong> The gene could not be deleted.");
+                    failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + accessionNumber + ")</b> could not be deleted.");
                 }
             },
 
             error : function(result, status, error) {
-                failAlert("<strong>Error :</strong> The gene could not be deleted.");
+                failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + accessionNumber + ")</b> could not be deleted.");
             }
         });
+    });
+
+        // Gene component browsing
+    $("#geneTable").on("click", ".geneComponentButton", function() {
+        cleanErrors();
+        id = $(this).parent().data("id");
+        type = $(".geneComponentType.active").eq(0).data("type");
+
+        updateGeneComponentTable(id, type);
     });
 
         // Close modifications button
@@ -77,7 +87,6 @@ $( document ).ready(function() {
 
     $("li.specificPage").bind("click", function() {
         var page = parseInt($(this).text());
-        console.log("Chose page : " + page);
         updateGenePage(page);
     });
 
@@ -88,8 +97,85 @@ $( document ).ready(function() {
                                   .unbind("click")
                                   .bind("click", clickAddGene);
     });
-    /*****************************************************/
 
+    $(".geneComponentType").click(function() {
+        $(".geneComponentType.active").removeClass("active");
+        $(this).addClass("active");
+        type = $(".geneComponentType.active").eq(0).data("type");
+
+        updateGeneComponentTable(id, type);
+    });
+
+    $("#geneComponentTable").on("click", ".geneComponentDeleteButton", function() {
+        $line = $(this).parent().parent();
+        var componentId = $line.data("id");
+        var type = $(".geneComponentType.active").eq(0).data("type");
+        var name = $line.find(".geneComponentName").html();
+
+        console.log(name);
+
+        $.ajax({
+            url  : "db/delete_gene_component.php",
+            type : "POST",
+            data : "id=" + componentId,
+            dataType : "json",
+
+            success : function(json_result, status) {
+                if(status == "success" && json_result == "1")
+                {
+                    successAlert("The " + type + " " + name + " has been deleted.");
+                    $line.remove();
+                } else {
+                    failAlert("<strong>Error :</strong> The " + type + " could not be deleted.");
+                }
+            },
+
+            error : function(result, status, error) {
+                failAlert("<strong>Error :</strong> The " + type + " could not be deleted.");
+            }
+        });
+    });
+
+    $("#addGeneComponent").click(function() {
+        if(!checkGeneComponentInput()) {
+            return;
+        }
+
+        var name = "";
+
+        if($("#geneComponentName").val() == "")
+        {
+            var count = parseInt($(".geneComponentLine").length)+1;
+            name = $(".geneComponentType.active").eq(0).data("type") + count;
+        } else {
+            name = $("#geneComponentName").val();
+        }
+
+        var start = $("#geneComponentPositionStart").val();
+        var end   = $("#geneComponentPositionEnd").val();
+        var type  = $(".geneComponentType.active").eq(0).data("type");
+
+        $.ajax({
+            url  : "db/add_gene_component.php",
+            type : "POST",
+            data : "start=" + start + "&end=" + end + "&type=" + type + "&name=" + name + "&gene_id=" + id,
+            dataType : "json",
+
+            success : function(json_result, status) {
+                if(status == "success" && json_result == "1") {
+                    successAlert("The " + type + " <b>" + name + "</b> has been created.");
+                    updateGeneComponentTable(id, type);
+                } else {
+                    failAlert("<strong>Error :</strong> The " + type + " <b>" + name + "</b> could not be created.");
+                }
+            },
+
+            error : function(result, status, error) {
+                failAlert("<strong>Error :</strong> The " + type + " <b>" + name + "</b> could not be created.");
+            }
+        });
+    });
+    /*****************************************************/
 
 
     /** FUNCTIONS*****************************************/
@@ -179,7 +265,7 @@ $( document ).ready(function() {
     }
 
     function clickSaveChanges() {
-        if(!checkInputs())
+        if(!checkGeneInputs())
         {
             return;
         }
@@ -197,11 +283,11 @@ $( document ).ready(function() {
 
             success : function(json_result, status) {
                 if(status == "success" && json_result == "1") {
-                    successAlert("Gene has been updated.");
+                    successAlert("The gene <b>" + id + " (" + accessionNumber + ")</b> has been updated.");
 
                     // Update line in array
                     $("tr#lineId" + id + " .genePosition").text(positionStart + ".." + positionEnd);
-                    $("tr#lineId" + id + " .numAccession").text(accessionNumber);
+                    $("tr#lineId" + id + " .numAccession").html("<b>"+accessionNumber+"</b>");
                     $("tr#lineId" + id + " .geneLength").text(positionEnd-positionStart);
 
                     // Update actions data
@@ -210,12 +296,12 @@ $( document ).ready(function() {
                     $("tr#lineId" + id + " td.geneActions").data("end", positionEnd);
                     $("tr#lineId" + id + " td.geneActions").data("sequence", sequence);
                 } else {
-                    failAlert("<strong>Error :</strong> The gene could not be updated.");
+                    failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + accessionNumber + ")</b> could not be updated.");
                 }
             },
 
             error : function(result, status, error) {
-                failAlert("<strong>Error :</strong> The gene could not be updated.");
+                failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + accessionNumber + ")</b> could not be updated.");
             }
         });
 
@@ -224,7 +310,7 @@ $( document ).ready(function() {
     }
 
     function clickAddGene() {
-        if(!checkInputs())
+        if(!checkGeneInputs())
         {
             return;
         }
@@ -242,38 +328,20 @@ $( document ).ready(function() {
 
             success : function(json_result, status) {
                 if(status == "success" && json_result == "1") {
-                    successAlert("The gene has been created.");
+                    successAlert("The gene <b>" + accessionNumber + "</b> has been created.");
                     updatePagination(true);
                 } else {
-                    failAlert("<strong>Error :</strong> The gene could not be created.");
+                    failAlert("<strong>Error :</strong> The gene <b>" + accessionNumber + "</b> could not be created.");
                 }
             },
 
             error : function(result, status, error) {
-                failAlert("<strong>Error :</strong> The gene could not be created.");
+                failAlert("<strong>Error :</strong> The gene <b>" + accessionNumber + "</b> could not be created.");
             }
         });
 
         cleanErrors();
         $('#myModal').modal('toggle');
-    }
-
-    function checkInputs() {
-        cleanErrors();
-
-        if(!isSequenceValid()) {
-            $("#geneSequence").parent().addClass("has-error");
-        }
-
-        if(!$("#geneAccessionNumber").val()) {
-            $("#geneAccessionNumber").parent().addClass("has-error");
-        }
-
-        if(!$("#genePositionStart").val() || !$("#genePositionEnd").val() || parseInt($("#genePositionStart").val()) >= parseInt($("#genePositionEnd").val())) {
-            $("#genePositionEnd").parent().addClass("has-error");
-        }
-
-        return ($(".has-error").length > 0) ? false : true;
     }
 
     function isSequenceValid() {
@@ -309,7 +377,6 @@ $( document ).ready(function() {
                     pageLimit = nbPages-1;
                     updateGenePage(pageLimit);
 
-
                     $("li.specificPage").unbind("click")
                                         .bind("click", function() {
                                             var page = parseInt($(this).text());
@@ -324,6 +391,78 @@ $( document ).ready(function() {
                 failAlert("<strong>Error :</strong> Pagination couldn't be refreshed.");
             }
         });
+    }
+
+    function updateGeneComponentTable(id, type) {
+        $.ajax({
+            url  : "db/get_gene_component.php",
+            type : "POST",
+            data : "gene_id=" + id + "&type=" + type,
+            dataType : "html",
+
+            success : function(html_result, status) {
+                if(status == "success") {
+                    $("#geneComponentTable tbody tr").remove();
+                    $("#geneComponentTable tbody").append(html_result);
+                } else {
+                    failAlert("<strong>Error :</strong> Gene components could not be loaded.");
+                }
+            },
+
+            error : function(result, status, error) {
+                failAlert("<strong>Error :</strong> Gene components could not be loaded.");
+            }
+        });
+    }
+
+    function checkGeneInputs() {
+        cleanErrors();
+
+        if(!isSequenceValid()) {
+            $("#geneSequence").parent().addClass("has-error");
+            failAlert("<strong>Error :</strong> Check sequence's field. It must be DNA sequence.");
+        }
+
+        if(!$("#geneAccessionNumber").val()) {
+            $("#geneAccessionNumber").parent().addClass("has-error");
+            failAlert("<strong>Error :</strong> The accession number must be provided in order to create a new gene.");
+        }
+
+        var start = parseInt($("#genePositionStart").val());
+        var end   = parseInt($("#genePositionEnd").val());
+
+        if(isNaN(start) || isNaN(end)) {
+            $("#genePositionEnd").parent().addClass("has-error");
+            failAlert("<strong>Error :</strong> Position must be provided in order to create a new gene.");
+        } else if(start >= end) {
+            $("#genePositionEnd").parent().addClass("has-error");
+            failAlert("<strong>Error :</strong> The end position of the gene must be located after its start.");
+        }
+
+        return ($(".has-error").length > 0) ? false : true;
+    }
+
+    function checkGeneComponentInput() {
+        cleanErrors();
+
+        var start = parseInt($("#geneComponentPositionStart").val());
+        var end   = parseInt($("#geneComponentPositionEnd").val());
+        var min   = parseInt($("#lineId"+id+" td:eq(0)").data("start"));
+        var max   = parseInt($("#lineId"+id+" td:eq(0)").data("end"));
+        var type  = $(".geneComponentType.active").eq(0).data("type");
+
+        if(isNaN(start) || isNaN(end)) {
+            $("#geneComponentPositionEnd").parent().addClass("has-error");
+            failAlert("<strong>Error :</strong> Position must be provided in order to create a new " + type + ".");
+        } else if(start >= end) {
+            $("#geneComponentPositionEnd").parent().addClass("has-error");
+            failAlert("<strong>Error :</strong> The end position of the " + type + " must be located after its start.");
+        } else if(start < min || end > max) {
+            $("#geneComponentPositionEnd").parent().addClass("has-error");
+            failAlert("<strong>Error :</strong> The position of the " + type + " must be in the gene position's interval.");
+        }
+
+        return ($(".has-error").length > 0) ? false : true;
     }
     /*****************************************************/
 

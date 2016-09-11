@@ -21,11 +21,11 @@ $print_limit = 10;
     <table id="geneTable" data-page="1" data-lineslimit="<?php echo $print_limit; ?>" class="table table-striped table-bordered table-list">
         <thead>
             <tr>
-                <th><p class="fa fa-cog"></p> Tools</th>
-                <th class="hidden-xs">ID</th>
-                <th>Accession number</th>
-                <th>Positions</th>
-                <th>Length (bp)</th>
+                <th id="geneActionsHeader" class="text-center"><span><p class="fa fa-cog"></p> Tools</span></th>
+                <th class="hidden-xs text-center">ID</th>
+                <th class="text-center">Accession number</th>
+                <th class="text-center">Positions</th>
+                <th class="text-center">Length (bp)</th>
             </tr>
         </thead>
         <tbody>
@@ -35,15 +35,15 @@ $print_limit = 10;
             while($row = $result->fetch_assoc()) {
             ?>
             <tr class="geneLine" id="lineId<?php echo $row["ID"] ?>">
-                <td align="center" class="geneActions" data-numaccession="<?php echo $row["NUM_ACCESSION"] ?>" data-end="<?php echo $row["END"] ?>"  data-start="<?php echo $row["START"] ?>" data-sequence="<?php echo $row["SEQ"] ?>" data-id='<?php echo $row["ID"] ?>'>
+                <td class="geneActions text-center" data-numaccession="<?php echo $row["NUM_ACCESSION"] ?>" data-end="<?php echo $row["END"] ?>"  data-start="<?php echo $row["START"] ?>" data-sequence="<?php echo $row["SEQ"] ?>" data-id='<?php echo $row["ID"] ?>'>
                     <button id="modifyGene" class="btn btn-default modifyButton" data-toggle="modal" data-target="#myModal"><em class="fa fa-pencil"></em> Modify</button>
                     <button class="btn btn-danger deleteButton"><em class="fa fa-trash"></em> Delete</button>
-                    <button class="btn btn-success"><em class="glyphicon glyphicon-eye-open"></em> Browse introns/exons</button>
+                    <button class="btn btn-success geneComponentButton" data-toggle="modal" data-target="#geneComponentModal"><em class="glyphicon glyphicon-eye-open"></em> Browse introns/exons</button>
                 </td>
-                <td class="hidden-xs"><?php echo $row["ID"]; ?></td>
-                <td class="numAccession"><?php echo $row["NUM_ACCESSION"]; ?></td>
-                <td class="genePosition"><?php echo $row["START"]. ".." . $row["END"]; ?> </td>
-                <td class="geneLength"><?php echo ($row["END"] - $row["START"]); ?></td>
+                <td class="hidden-xs text-center"><?php echo $row["ID"]; ?></td>
+                <td class="numAccession text-center text-uppercase"><?php echo "<b>".$row["NUM_ACCESSION"]."</b>"; ?></td>
+                <td class="genePosition text-center"><?php echo $row["START"]. ".." . $row["END"]; ?> </td>
+                <td class="geneLength text-center"><?php echo ($row["END"] - $row["START"]); ?></td>
             </tr>
             <?php }  ?>
         </tbody>
@@ -95,6 +95,72 @@ $print_limit = 10;
         </div>
     </div>
 </div>
+
+<!-- Gene browsing popup -->
+<div class="modal fade" id="geneComponentModal" tabindex="-1" role="dialog" aria-labelledby="geneComponentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="popupTitle">Managing gene components</h4>
+
+                <div class="btn-group" role="group" id="geneComponentType">
+                    <button type="button" data-type="exon" class="btn btn-default active geneComponentType"> Exon </button>
+                    <button type="button" data-type="intron" class="btn btn-default geneComponentType"> Intron </button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group col-xs-1">
+                        <label class="sr-only" for="geneComponentName">Name</label>
+                        <input class="form-control" type="text" value="" id="geneComponentName" placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <div id="geneComponentPosition" class="input-group col-xs-1">
+                            <input type="number" class="form-control" id="geneComponentPositionStart" min="0" placeholder="Start" />
+                            <span class="input-group-addon">-</span>
+                            <input type="number" class="form-control" id="geneComponentPositionEnd" min="0" placeholder="End"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-xs-1">
+                        <button id="addGeneComponent" type="button" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="divider"></div>
+
+                <div>
+                    <table id="geneComponentTable" class="table table-striped table-bordered table-list">
+                        <thead>
+                            <tr>
+                                <th class="text-center" id="geneComponentRemove"><p class="fa fa-cog"></p></th>
+                                <th class="hidden-xs text-center geneComponentName">Name</th>
+                                <th class="text-center">Positions</th>
+                                <th class="text-center">Length (bp)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="closeModifications" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <?php
 $sql = "SELECT count(*) as nbLines FROM genes LIMIT 50";

@@ -32,3 +32,86 @@
     left:16px;
     width:418px;
 }
+
+#geneComponentName {
+    position:relative;
+    right:15px;
+    width:210px;
+}
+
+#geneComponentPosition {
+    position: relative;
+    left:135px;
+    width: 260px;
+}
+
+#addGeneComponent {
+    width: 34px;
+    height: 34px;
+    text-align:center;
+    padding:0;
+    position:relative;
+    left:445px;
+}
+
+#addGeneComponent span {
+    display: inline-block;
+    position:relative;
+    top:2px;
+}
+
+#geneComponentType {
+    position:absolute;
+    top:9px;
+    right:150px;
+}
+
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 15px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+#geneComponentRemove {
+    width:50px;
+}
+
+#geneComponentRemove p {
+    position:absolute;
+    top:92px;
+    left:35px;
+}
+
+.geneComponentActions {
+    width:50px;
+}
+
+.geneComponentActions button {
+    width:20px;
+    height:20px;
+}
+
+.geneComponentActions span {
+    display:inline-block;
+    position:relative;
+    top:-5px;
+    left:-6px;
+}
+
+.geneComponentName {
+    width:250px;
+}
+
+
+#geneTable thead tr th {
+    font-size:16px;
+}
+
+#geneActionsHeader span {
+    display:inline-block;
+    position:relative;
+    top:6px;
+}
