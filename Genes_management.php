@@ -180,7 +180,7 @@ $nbPages = ceil($row["nbLines"]/$print_limit);
 
 <div class="panel-footer">
     <div class="row">
-        <div id="pageCounter" class="col col-xs-4 textContainer"><h4>Page 0 of <?php echo $nbPages; ?></h4></div>
+        <div id="pageCounter" class="col col-xs-4 textContainer"><h4>Page <?php echo ($nbPages > 0) ? "1" : "0"; ?> of <?php echo $nbPages; ?></h4></div>
         <div class="col col-xs-8">
             <ul class="pagination pagination-lg pull-right">
                 <li><a id="previousPage" class="disabled" href="#">«</a></li>

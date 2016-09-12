@@ -28,7 +28,7 @@ $( document ).ready(function() {
     });
 
     $("#protein").click(function(){
-        $("#content" ).load( "Protein.html" );
+        $("#content" ).load( "Protein.php" );
     });
 
     $("#btn_number_accession").click(function(){

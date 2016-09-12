@@ -13,8 +13,6 @@ $( document ).ready(function() {
         var sequence = $(this).parent().data("sequence");
         var name = $(this).parent().data("name");
 
-        console.log(name);
-
         $("#confirmModifications").html("Save changes")
                                   .unbind("click")
                                   .bind("click", clickSaveChanges);
