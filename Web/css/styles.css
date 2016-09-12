@@ -16,11 +16,6 @@
   color: #34be3f;
 }
 
-.iframe {
-    align : middle;
-    border-color: red;
-}
-
 #pageCounter {
     position : relative;
     top : 25px;
@@ -116,11 +111,13 @@
     top:6px;
 }
 
-.form-horinzontal {
-
-}
-
 #Blast-form {
     position: relative;
-    left: 500px;
+    left: 0px;
+}
+
+#Iframe {
+    position: relative;
+    left:200px;
+    max-height: 300px;
 }
