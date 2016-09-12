@@ -82,9 +82,10 @@ $( document ).ready(function() {
 
     $("#previousPage").on("click", function() {
         var currentPage = $("#geneTable").data("page") - 1;
+        var nbPages = $("li.specificPage").length;
 
         if(currentPage < 1) {
-            currentPage = 1;
+            currentPage = (nbPages == 0) ? 0 : 1;
         }
 
         updateGenePage(currentPage);
