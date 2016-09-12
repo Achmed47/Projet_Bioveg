@@ -116,9 +116,13 @@
     top:6px;
 }
 
-
-
 #Blast-form {
     position: relative;
     left: 0px;
+}
+
+#Iframe {
+    position: relative;
+    left:200px;
+    max-height: 300px;
 }
