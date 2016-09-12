@@ -2,17 +2,21 @@ $( document ).ready(function() {
     $("#geneList").on("click", "li.geneListRow", function() {
         $("#geneListButton").html($(this).text() + "<span class=\"caret\"></span>");
         var id = $(this).data("id");
+        var numAccession = $(this).data("numaccession");
+        console.log("id : " + id + " | " + numAccession);
 
-        console.log("id : " + id);
+        $("#geneSequence").html('<img src="Web/css/spin.gif" alt="Loading genome ..." style="width:64px;height:64px;" />');
+
         $.ajax({
-            url  : "db/translate_dna_to_prot.php",
+            url  : "db/get_gene_dna_sequence.php",
             type : "POST",
-            data : "id=" + id,
-            dataType : "json",
+            data : "numAccession=" + numAccession,
+            dataType : "html",
 
-            success : function(json_result, status) {
+            success : function(html_result, status) {
                 if(status == "success") {
-                    $("#geneSequence").text(json_result);
+                    console.log(html_result);
+                    $("#geneSequence").html(html_result);
                 }
             },
 
@@ -22,3 +26,4 @@ $( document ).ready(function() {
         });
     });
 });
+

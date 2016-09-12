@@ -24,10 +24,10 @@ if(is_numeric($page) && $page > 0 && is_numeric($nbLines) && $nbLines > 0)
                         <button class="btn btn-success geneComponentButton" data-toggle="modal" data-target="#geneComponentModal"><em class="glyphicon glyphicon-eye-open"></em> Browse introns/exons</button>
                     </td>
                     <td class="hidden-xs text-center">'.$row["ID"].'</td>
-                    <td class="geneName hidden-xs text-center"><b>'.$row["NAME"].'</b></td>
-                    <td class="numAccession text-center text-uppercase">'.$row["NUM_ACCESSION"].'</td>
-                    <td class="genePosition text-center">'.$row["START"].'..'.$row["END"].'</td>
-                    <td class="geneLength text-center">'.($row["END"] - $row["START"]).'</td>
+                    <td class="numAccession text-center text-uppercase"><a target="_blank" href="http://www.kegg.jp/dbget-bin/www_bget?ela:'.$row["NUM_ACCESSION"].'">'.$row["NUM_ACCESSION"].'</a></td>
+                    <td class="geneName hidden-xs text-center"><em>'.$row["NAME"].'</em></td>
+                    <td class="genePosition text-center"><b>'.$row["START"].'</b> .. <b>'.$row["END"].'</b></td>
+                    <td class="geneLength text-center">'.($row["END"] - $row["START"]+1).'</td>
                 </tr>';
         }
 
