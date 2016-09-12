@@ -11,10 +11,14 @@ $( document ).ready(function() {
         var start = $(this).parent().data("start");
         var end = $(this).parent().data("end");
         var sequence = $(this).parent().data("sequence");
+        var name = $(this).parent().data("name");
+
+        console.log(name);
 
         $("#confirmModifications").html("Save changes")
                                   .unbind("click")
                                   .bind("click", clickSaveChanges);
+        $("#geneName").val(name);
         $("#genePositionStart").val(start);
         $("#genePositionEnd").val(end);
         $("#geneAccessionNumber").val(numAccession);
@@ -27,6 +31,7 @@ $( document ).ready(function() {
     $("#geneTable").on("click", ".deleteButton", function() {
         id = $(this).parent().data("id");
         var accessionNumber = $(this).parent().data("numaccession");
+        var name = $(this).parent().data("name");
 
         $.ajax({
             url  : "db/delete_gene.php",
@@ -37,16 +42,16 @@ $( document ).ready(function() {
             success : function(json_result, status) {
                 if(status == "success" && json_result == "1")
                 {
-                    successAlert("The gene <b>" + id + " (" + accessionNumber + ")</b> has been deleted.");
+                    successAlert("The gene <b>" + id + " (" + name + ")</b> has been deleted.");
                     $("#lineId" + id).remove();
-                    updatePagination(true);
+                    updatePagination(false);
                 } else {
-                    failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + accessionNumber + ")</b> could not be deleted.");
+                    failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + name + ")</b> could not be deleted.");
                 }
             },
 
             error : function(result, status, error) {
-                failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + accessionNumber + ")</b> could not be deleted.");
+                failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + name + ")</b> could not be deleted.");
             }
         });
     });
@@ -111,8 +116,6 @@ $( document ).ready(function() {
         var componentId = $line.data("id");
         var type = $(".geneComponentType.active").eq(0).data("type");
         var name = $line.find(".geneComponentName").html();
-
-        console.log(name);
 
         $.ajax({
             url  : "db/delete_gene_component.php",
@@ -185,6 +188,7 @@ $( document ).ready(function() {
         $("#genePositionEnd").val("");
         $("#geneAccessionNumber").val("");
         $("#geneSequence").val("");
+        $("#geneName").val("");
     }
 
     function removeAlert() {
@@ -274,34 +278,37 @@ $( document ).ready(function() {
         var positionEnd = $("#genePositionEnd").val();
         var accessionNumber = $("#geneAccessionNumber").val();
         var sequence = $("#geneSequence").val();
+        var name = $("#geneName").val();
 
         $.ajax({
             url  : "db/modify_gene.php",
             type : "POST",
-            data : "id=" + id + "&start=" + positionStart + "&end=" + positionEnd + "&accession=" + accessionNumber + "&sequence=" + sequence,
+            data : "id=" + id + "&name=" + name + "&start=" + positionStart + "&end=" + positionEnd + "&accession=" + accessionNumber + "&sequence=" + sequence,
             dataType : "json",
 
             success : function(json_result, status) {
                 if(status == "success" && json_result == "1") {
-                    successAlert("The gene <b>" + id + " (" + accessionNumber + ")</b> has been updated.");
+                    successAlert("The gene <b>" + id + " (" + name + ")</b> has been updated.");
 
                     // Update line in array
+                    $("tr#lineId" + id + " .geneName").html("<b>" + name + "</b>");
                     $("tr#lineId" + id + " .genePosition").text(positionStart + ".." + positionEnd);
-                    $("tr#lineId" + id + " .numAccession").html("<b>"+accessionNumber+"</b>");
+                    $("tr#lineId" + id + " .numAccession").text(accessionNumber);
                     $("tr#lineId" + id + " .geneLength").text(positionEnd-positionStart);
 
                     // Update actions data
                     $("tr#lineId" + id + " td.geneActions").data("numaccession", accessionNumber);
+                    $("tr#lineId" + id + " td.geneActions").data("name", name);
                     $("tr#lineId" + id + " td.geneActions").data("start", positionStart);
                     $("tr#lineId" + id + " td.geneActions").data("end", positionEnd);
                     $("tr#lineId" + id + " td.geneActions").data("sequence", sequence);
                 } else {
-                    failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + accessionNumber + ")</b> could not be updated.");
+                    failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + name + ")</b> could not be updated.");
                 }
             },
 
             error : function(result, status, error) {
-                failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + accessionNumber + ")</b> could not be updated.");
+                failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + name + ")</b> could not be updated.");
             }
         });
 
@@ -319,24 +326,25 @@ $( document ).ready(function() {
         var positionEnd = $("#genePositionEnd").val();
         var accessionNumber = $("#geneAccessionNumber").val();
         var sequence = $("#geneSequence").val();
+        var name = $("#geneName").val();
 
         $.ajax({
             url  : "db/add_gene.php",
             type : "POST",
-            data : "start=" + positionStart + "&end=" + positionEnd + "&accession=" + accessionNumber + "&sequence=" + sequence,
+            data : "name=" + name + "&start=" + positionStart + "&end=" + positionEnd + "&accession=" + accessionNumber + "&sequence=" + sequence,
             dataType : "json",
 
             success : function(json_result, status) {
                 if(status == "success" && json_result == "1") {
-                    successAlert("The gene <b>" + accessionNumber + "</b> has been created.");
+                    successAlert("The gene <b>" + name + "</b> has been created.");
                     updatePagination(true);
                 } else {
-                    failAlert("<strong>Error :</strong> The gene <b>" + accessionNumber + "</b> could not be created.");
+                    failAlert("<strong>Error :</strong> The gene <b>" + name + "</b> could not be created.");
                 }
             },
 
             error : function(result, status, error) {
-                failAlert("<strong>Error :</strong> The gene <b>" + accessionNumber + "</b> could not be created.");
+                failAlert("<strong>Error :</strong> The gene <b>" + name + "</b> could not be created.");
             }
         });
 
@@ -364,6 +372,7 @@ $( document ).ready(function() {
                 if(status == "success") {
                     var currentNbLines = parseInt(json_result);
                     var nbPages = 1;
+                    var currentPage = $("li.specificPage.active").text();
 
                     $(".specificPage").remove();
 
@@ -375,7 +384,8 @@ $( document ).ready(function() {
                     }
 
                     pageLimit = nbPages-1;
-                    updateGenePage(pageLimit);
+
+                    updateGenePage(doRedirectToLastPage ? pageLimit : currentPage);
 
                     $("li.specificPage").unbind("click")
                                         .bind("click", function() {
@@ -437,6 +447,11 @@ $( document ).ready(function() {
         } else if(start >= end) {
             $("#genePositionEnd").parent().addClass("has-error");
             failAlert("<strong>Error :</strong> The end position of the gene must be located after its start.");
+        }
+
+        if(!$("#geneName").val()) {
+            $("#geneName").parent().addClass("has-error");
+            failAlert("<strong>Error :</strong> The gene's name must be provided in order to create a new gene.");
         }
 
         return ($(".has-error").length > 0) ? false : true;

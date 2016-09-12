@@ -23,6 +23,7 @@ $print_limit = 10;
             <tr>
                 <th id="geneActionsHeader" class="text-center"><span><p class="fa fa-cog"></p> Tools</span></th>
                 <th class="hidden-xs text-center">ID</th>
+                <th class="text-center">Name</th>
                 <th class="text-center">Accession number</th>
                 <th class="text-center">Positions</th>
                 <th class="text-center">Length (bp)</th>
@@ -35,13 +36,14 @@ $print_limit = 10;
             while($row = $result->fetch_assoc()) {
             ?>
             <tr class="geneLine" id="lineId<?php echo $row["ID"] ?>">
-                <td class="geneActions text-center" data-numaccession="<?php echo $row["NUM_ACCESSION"] ?>" data-end="<?php echo $row["END"] ?>"  data-start="<?php echo $row["START"] ?>" data-sequence="<?php echo $row["SEQ"] ?>" data-id='<?php echo $row["ID"] ?>'>
+                <td class="geneActions text-center" data-numaccession="<?php echo $row["NUM_ACCESSION"]; ?>" data-end="<?php echo $row["END"]; ?>"  data-start="<?php echo $row["START"]; ?>" data-name="<?php echo $row["NAME"]; ?>" data-sequence="<?php echo $row["SEQ"]; ?>" data-id='<?php echo $row["ID"] ?>'>
                     <button id="modifyGene" class="btn btn-default modifyButton" data-toggle="modal" data-target="#myModal"><em class="fa fa-pencil"></em> Modify</button>
                     <button class="btn btn-danger deleteButton"><em class="fa fa-trash"></em> Delete</button>
                     <button class="btn btn-success geneComponentButton" data-toggle="modal" data-target="#geneComponentModal"><em class="glyphicon glyphicon-eye-open"></em> Browse introns/exons</button>
                 </td>
                 <td class="hidden-xs text-center"><?php echo $row["ID"]; ?></td>
-                <td class="numAccession text-center text-uppercase"><?php echo "<b>".$row["NUM_ACCESSION"]."</b>"; ?></td>
+                <td class="hidden-xs text-center geneName"><?php echo "<b>".$row["NAME"]."</b>"; ?></td>
+                <td class="numAccession text-center text-uppercase"><?php echo $row["NUM_ACCESSION"]; ?></td>
                 <td class="genePosition text-center"><?php echo $row["START"]. ".." . $row["END"]; ?> </td>
                 <td class="geneLength text-center"><?php echo ($row["END"] - $row["START"]); ?></td>
             </tr>
@@ -63,6 +65,13 @@ $print_limit = 10;
 
             <div class="modal-body">
                 <form>
+                    <div class="form-group row">
+                        <label for="geneName" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-xs-9">
+                            <input class="form-control" type="text" value="" id="geneName">
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Position</label>
                         <div id="genePositionInputBlock" class="input-group col-xs-9">
