@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 
     // Loading genome visualization by default
-    $( "#content" ).load( "Genome_visualization.html" );
+    $( "#contentGlobal" ).load( "Genome_visualization.html" );
     $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) { });
 
     // Menu actions
@@ -11,24 +11,24 @@ $( document ).ready(function() {
     });
 
     $("#genome").click(function(){
-        $( "#content" ).load( "Genome_visualization.html" );
+        $( "#contentGlobal" ).load( "Genome_visualization.html" );
         $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) { });
     });
 
     $("#blast").click(function(){
-        $("#content" ).load( "Blast.php" );
+        $("#contentGlobal" ).load( "Blast.php" );
     });
 
     $("#primer").click(function(){
-        $("#content" ).load( "Primer.php" );
+        $("#contentGlobal" ).load( "Primer.php" );
     });
 
     $("#management").click(function(){
-        $("#content" ).load( "Genes_management.php" );
+        $("#contentGlobal" ).load( "Genes_management.php" );
     });
 
     $("#protein").click(function(){
-        $("#content" ).load( "Protein.php" );
+        $("#contentGlobal" ).load( "Protein.php" );
     });
 
     $("#btn_number_accession").click(function(){
