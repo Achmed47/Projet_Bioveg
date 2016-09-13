@@ -16,11 +16,11 @@ $( document ).ready(function() {
     });
 
     $("#blast").click(function(){
-        $("#content" ).load( "Blast.html" );
+        $("#content" ).load( "Blast.php" );
     });
 
     $("#primer").click(function(){
-        $("#content" ).load( "Primer.html" );
+        $("#content" ).load( "Primer.php" );
     });
 
     $("#management").click(function(){

@@ -1,3 +1,7 @@
+<?php
+include("db/connexion.php");
+?>
+
 <form class="form-horinzontal" id="Blast-form">
     <div class="row">
         <div class="btn-group col-md-4" role="group" id=button_group_blast>
@@ -13,10 +17,13 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li class="liste_dropdown_gene"><a href="#">gene 1 </a></li>
-                <li class="liste_dropdown_gene"><a href="#">gene 2 </a></li>
-                <li class="liste_dropdown_gene"><a href="#">gene 3 </a></li>
-                <li class="liste_dropdown_gene"><a href="#">gene 4 </a></li>
+                <?php
+                $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
+                $result = $conn->query($sql);
+                while($row = $result->fetch_assoc()) {
+                    echo "<li data-id=\"".$row["ID"]."\" class=\"geneListRow\"><a href=\"#\">".$row["NAME"]." (".$row["NUM_ACCESSION"].")</a></li>";
+                }
+                ?>
             </ul>
         </div>
     </div>
@@ -43,7 +50,7 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu_bd_blast">
-                <li class="liste_dropdown_bd" data-numaccession="Vitis vinifera (taxid:29760)"><a> Genome de la vigne </a></li>
+                <li class="liste_dropdown_bd" data-numaccession="Vitis vinifera (taxid:29760)"><a> Genome de la Vigne (Vitis Vinifera) </a></li>
                 <li class="liste_dropdown_bd" data-numaccession="Eutypa lata (taxid:97096)"><a> Genome d'Eutypa Lata </a></li>
             </ul>
         </div>
