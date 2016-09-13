@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD:Blast.php
     include("db/connexion.php");
-=======
-include("db/connexion.php");
->>>>>>> Projet_bioveg/master:Blast.php
 ?>
 
 <form class="form-horinzontal" id="Blast-form">
