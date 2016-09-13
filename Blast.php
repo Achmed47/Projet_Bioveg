@@ -61,13 +61,8 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu_bd_blast">
-<<<<<<< HEAD:Blast.php
                 <li class="liste_dropdown_bd" data-numaccession="Vitis vinifera (taxid:29760)"><a>Vitis vinifera</a></li>
                 <li class="liste_dropdown_bd" data-numaccession="Eutypa lata (taxid:97096)"><a>Eutypa Lata </a></li>
-=======
-                <li class="liste_dropdown_bd" data-numaccession="Vitis vinifera (taxid:29760)"><a> Genome de la Vigne (Vitis Vinifera) </a></li>
-                <li class="liste_dropdown_bd" data-numaccession="Eutypa lata (taxid:97096)"><a> Genome d'Eutypa Lata </a></li>
->>>>>>> Projet_bioveg/master:Blast.php
             </ul>
         </div>
     </div>
