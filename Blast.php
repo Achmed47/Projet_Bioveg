@@ -35,7 +35,6 @@
                 }
                 ?>
             </ul>
->>>>>>> Projet_bioveg/master:Blast.php
         </div>
     </div>
     <br/>
