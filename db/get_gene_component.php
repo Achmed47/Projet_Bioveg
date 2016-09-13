@@ -22,7 +22,7 @@ if(is_numeric($gene_id) && ($type == "exon" || $type == "intron"))
                     </td>
                     <td class="hidden-xs text-center geneComponentName"><b>'.$row["NAME"].'</b></td>
                     <td class="genePosition text-center">'.$row["START"].'..'.$row["END"].'</td>
-                    <td class="geneLength text-center">'.($row["END"] - $row["START"]).'</td>
+                    <td class="geneLength text-center">'.($row["END"] - $row["START"]+1).'</td>
                 </tr>';
         }
 

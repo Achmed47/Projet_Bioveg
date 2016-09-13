@@ -23,8 +23,8 @@ $print_limit = 10;
             <tr>
                 <th id="geneActionsHeader" class="text-center"><span><p class="fa fa-cog"></p> Tools</span></th>
                 <th class="hidden-xs text-center">ID</th>
-                <th class="text-center">Name</th>
                 <th class="text-center">Accession number</th>
+                <th class="text-center">Name / Function</th>
                 <th class="text-center">Positions</th>
                 <th class="text-center">Length (bp)</th>
             </tr>
@@ -42,10 +42,10 @@ $print_limit = 10;
                     <button class="btn btn-success geneComponentButton" data-toggle="modal" data-target="#geneComponentModal"><em class="glyphicon glyphicon-eye-open"></em> Browse introns/exons</button>
                 </td>
                 <td class="hidden-xs text-center"><?php echo $row["ID"]; ?></td>
-                <td class="hidden-xs text-center geneName"><?php echo "<b>".$row["NAME"]."</b>"; ?></td>
-                <td class="numAccession text-center text-uppercase"><?php echo $row["NUM_ACCESSION"]; ?></td>
-                <td class="genePosition text-center"><?php echo $row["START"]. ".." . $row["END"]; ?> </td>
-                <td class="geneLength text-center"><?php echo ($row["END"] - $row["START"]); ?></td>
+                <td class="numAccession text-center text-uppercase"><?php echo "<a target='_blank' href='http://www.kegg.jp/dbget-bin/www_bget?ela:".$row["NUM_ACCESSION"]."'>".$row["NUM_ACCESSION"]."</a>"; ?></td>
+                <td class="hidden-xs text-center geneName"><?php echo "<em>".$row["NAME"]."</em>"; ?></td>
+                <td class="genePosition text-center"><?php echo "<b>".$row["START"]."</b> .. <b>" . $row["END"] . "</b>"; ?> </td>
+                <td class="geneLength text-center"><?php echo ($row["END"] - $row["START"]+1); ?></td>
             </tr>
             <?php }  ?>
         </tbody>
