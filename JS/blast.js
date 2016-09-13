@@ -1,6 +1,12 @@
 $(document).ready(function() {
     var Database_blast = "";
 
+    $("#geneList").on("click", "li.geneListRow", function() {
+        var numAccession = $(this).data("numaccession");
+        console.log("ok");
+        $("#geneListButton").html(numAccession + "<span class=\"caret\"></span>");
+    });
+
     $("#btn_number_accession").click(function(){
         $("#list_gene").hide();
         $("#num_access").show();

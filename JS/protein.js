@@ -5,7 +5,7 @@ $( document ).ready(function() {
         var numAccession = $(this).data("numaccession");
         console.log("id : " + id + " | " + numAccession);
 
-        $("#geneSequence").html('<img src="Web/css/spin.gif" alt="Loading genome ..." style="width:64px;height:64px;" />');
+        $("#loadingGif").show();
 
         $.ajax({
             url  : "db/get_gene_dna_sequence.php",
@@ -16,12 +16,14 @@ $( document ).ready(function() {
             success : function(html_result, status) {
                 if(status == "success") {
                     console.log(html_result);
+                    $("#loadingGif").hide();
                     $("#geneSequence").html(html_result);
                 }
             },
 
             error : function(result, status, error) {
-                console.log("error");
+                $("#loadingGif").hide();
+                $("#geneSequence").html("Couldn't get the protein sequence");
             }
         });
     });
