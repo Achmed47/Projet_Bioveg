@@ -25,7 +25,7 @@
     </div>
     <div class="input-group">
         <div class="panel panel-body">
-            <img src="Web/css/spin.gif" id="loadingGif" alt="Loading genome ..." style="display:none;width:64px;height:64px;" />
+            <img src="Web/css/spin.svg" id="loadingGif" alt="Loading genome ..." style="display:none;width:64px;height:64px;" />
 
             <div id=geneSequence>
             </div>

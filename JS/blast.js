@@ -1,7 +1,6 @@
 $(document).ready(function() {
     var databaseBlast = "";
 
-
     // Buttons' action
     $("#selectBlastList").click(function() {
         activateButton($(this));
@@ -44,26 +43,55 @@ $(document).ready(function() {
 
     // Submit form action
     $("#startBlast").click(function(){
-        var numAccession = "";
-        var request      = "";
-        var typeBlast    = $.trim($("#dropdownMenuBlastType").text());
-
-        if ($("#inputBlastPerso").css("display") != "none"){
-            numAccession = $("#inputBlastPerso").val();
-            console.log($("#inputBlastPerso").val());
-        } else {
-            console.log("nb options : " + $('#inputBlastList option').length + " && selected : " + $('#inputBlastList option:selected').data("numaccession"));
-            numAccession = $('#inputBlastList option:selected').data("numaccession");
+        if($(this).hasClass("disabled")) {
+            return;
         }
-        console.log("blastPerso : " + $("#inputBlastPerso").css("display") + " && blastList : " + $("#inputBlastList").css("display"));
-        console.log("numAccession : |" + numAccession + "|");
-        console.log("typeBlast : |" + typeBlast + "|");
-        console.log("databaseBlast : |" + databaseBlast + "|");
 
-        request = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?QUERY=" + numAccession + "&DATABASE=nr&EQ_MENU=" + databaseBlast + "&EQ_OP=AND&PROGRAM=" + typeBlast + "&FILTER=L&EXPECT=0.01&FORMAT_TYPE=HTML&NCBI_GI=on&HITLIST_SIZE=10&CMD=Put";
+        $("#loadingGifBlast").show();
+        $("#blastButtonText").text("Creating Blast request ...");
 
-        // console.log(request);
-        //window.open(request, "_blank");
+        var urlData   = "";
+        var request   = "";
+        var typeBlast = $.trim($("#dropdownMenuBlastType").text());
+
+        if ($("#inputBlastPerso").css("display") !== "none"){
+            urlData = "sequence=" + $("#inputBlastPerso").val();
+        } else {
+            urlData = "geneId=" + $('#inputBlastList option:selected').data("id");
+        }
+
+        urlData += "&typeBlast=" + typeBlast + "&database=" + databaseBlast;
+
+        console.log(urlData);
+
+        $.ajax({
+            url  : "db/get_blast_report.php",
+            type : "GET",
+            data : urlData,
+            dataType : "html",
+
+            success : function(html_result, status) {
+                if(status == "success") {
+                    var reportNumber = html_result;
+                    console.log(html_result);
+                    if(reportNumber === "error" || reportNumber === "") {
+                        failAlert("<b>Error :</b> Blast request couldn't be created. Check data.");
+                    } else {
+                        window.open("http://blast.ncbi.nlm.nih.gov/Blast.cgi?RID=" + reportNumber + "&CMD=GET", "_blank");
+                    }
+
+                    $("#loadingGifBlast").hide();
+                    $("#blastButtonText").text("Blast");
+                }
+            },
+
+            error : function(result, status, error) {
+                console.log(html_result);
+                failAlert("<b>Error :</b> Blast request couldn't be created.");
+                $("#loadingGifBlast").hide();
+                $("#blastButtonText").text("Blast");
+            }
+        });
     });
 
 
@@ -79,17 +107,16 @@ $(document).ready(function() {
 
     function checkInputs() {
         var disabled = false;
-        var $listGene = $("#inputBlastPerso");
 
         $("#startBlast").removeClass("disabled");
 
-        if ($listGene.css("display") != "none" && !$listGene.val()){
+        if ($("#inputBlastPerso").css("display") !== "none" && !$("#inputBlastPerso").val()){
             disabled = true;
-        } else if($("#inputBlastList").css("display") != "none" && $('#inputBlastList option:selected').text() == "Accession Number") {
+        } else if($("#inputBlastList").css("display") !== "none" && $('#inputBlastList option:selected').text() === "Select a gene ...") {
             disabled = true;
         }
 
-        if($("#blastDropdownType").text() == "Blast type" || $("#blastDropdownDb").text() == "Database")
+        if($.trim($("#blastDropdownType").text()) === "Blast type" || $.trim($("#dropdownMenuBlastDb").text()) === "Database")
         {
             disabled = true;
         }
@@ -97,6 +124,22 @@ $(document).ready(function() {
         if(disabled) {
             $("#startBlast").addClass("disabled");
         }
+    }
+
+    function removeAlert() {
+        if($("#blastManagementAlert").length)
+        {
+            $("#blastManagementAlert").remove();
+        }
+    }
+
+    function failAlert(msg) {
+        removeAlert();
+
+        $("#panelBody").prepend('<div id="blastManagementAlert" class="alert alert-danger">\
+               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\
+            ' + msg + '\
+          </div>');
     }
 
 });

@@ -12,18 +12,19 @@
 <!--                    <button class="btn btn-default blastAction" id="selectBlastFile" type="button"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>-->
                 </span>
 
+                <input id="inputBlastPerso" type="text" class="form-control blastAction" placeholder=" NCBI gi number / FASTA sequence">
 
-                <input id="inputBlastPerso" type="text" class="form-control blastAction" placeholder=" Accession Number">
 <!--
                 <span id="inputBlastFile">
                     <label class="custom-file">
-                      <input type="file" id="file" class="custom-file-input">
+                      <input type="file" id="file" cl   ass="custom-file-input">
                       <span class="custom-file-control"></span>
                     </label>
                 </span>
                 -->
+
                 <select id="inputBlastList" class="form-control blastAction">
-                    <option data-numaccession="" disabled selected>Accession Number</option>
+                    <option data-numaccession="" disabled selected>Select a gene ...</option>
                 <?php
                         $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
                         $result = $conn->query($sql);
@@ -64,7 +65,7 @@
             </button>
             <ul class="dropdown-menu" id="blastDropdownDb" aria-labelledby="dropdownMenu_bd_blast">
                 <li data-numaccession="Vitis vinifera (taxid:29760)"><a>Vitis vinifera</a></li>
-                <li data-numaccession="Eutypa lata (taxid:97096)"><a>Eutypa Lata</a></li>
+                <li data-numaccession="Eutypa lata (taxid:97096)"><a>Eutypa Lata</a</li>
             </ul>
         </div>
     </div>
@@ -73,7 +74,8 @@
 
     <div class="row">
         <div class="col-md-4">
-            <button class="btn btn-primary btn-lg btn-block disabled" type="button" id="startBlast">Blast</button>
+            <button class="btn btn-primary btn-lg btn-block disabled" type="button" id="startBlast">
+                <img src="Web/css/spin.svg" id="loadingGifBlast" alt="" /><span id="blastButtonText">Blast</span></button>
         </div>
     </div>
 </form>

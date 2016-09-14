@@ -9,7 +9,7 @@ $( document ).ready(function() {
         $("#loadingGif").show();
 
         $.ajax({
-            url  : "db/get_gene_dna_sequence.php",
+            url  : "db/get_gene_protein_sequence.php",
             type : "POST",
             data : "numAccession=" + numAccession,
             dataType : "html",
