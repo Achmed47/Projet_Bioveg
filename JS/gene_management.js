@@ -290,9 +290,9 @@ $( document ).ready(function() {
                     successAlert("The gene <b>" + id + " (" + name + ")</b> has been updated.");
 
                     // Update line in array
-                    $("tr#lineId" + id + " .geneName").html("<b>" + name + "</b>");
-                    $("tr#lineId" + id + " .genePosition").text(positionStart + ".." + positionEnd);
-                    $("tr#lineId" + id + " .numAccession").text(accessionNumber);
+                    $("tr#lineId" + id + " .geneName").html("<em>" + name + "</em>");
+                    $("tr#lineId" + id + " .genePosition").html("<b>" + positionStart + "</b> .. <b>" + positionEnd + "</b>");
+                    $("tr#lineId" + id + " .numAccession").html("<a target='_blank' href='http://www.kegg.jp/dbget-bin/www_bget?ela:" + accessionNumber + "'>" + accessionNumber + "</a>");
                     $("tr#lineId" + id + " .geneLength").text(positionEnd-positionStart);
 
                     // Update actions data

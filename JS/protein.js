@@ -5,6 +5,7 @@ $( document ).ready(function() {
         var numAccession = $(this).data("numaccession");
         console.log("id : " + id + " | " + numAccession);
 
+        $("#geneSequence").text("");
         $("#loadingGif").show();
 
         $.ajax({

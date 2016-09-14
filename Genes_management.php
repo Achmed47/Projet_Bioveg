@@ -5,16 +5,9 @@ $print_limit = 10;
 
 ?>
 
-<br/>
-
-<div class="col col-xs-6">
+<div class="col col-xs-6" id="createNewGeneButton">
     <button id="addGene" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-primary btn-create">Create New</button>
 </div>
-
-<div class="col col-xs-6 text-right">
-</div>
-
-<br/>
 
 <div id="panelBody" class="panel-body">
 

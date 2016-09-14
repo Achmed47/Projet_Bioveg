@@ -1,4 +1,4 @@
-/*navbar*/
+/*** INDEX ****/
 .nav {
   background-color: #8ae73c;
   border-color: black;
@@ -11,15 +11,31 @@
    background-color: #8ae73c;
 }
 
-}
 .nav  > li > a {
   color: #34be3f;
 }
+
+#menuGlobal {
+    margin-bottom:50px;
+}
+
+footer {
+    margin-top: 30px;
+}
+
+#contentGlobal {
+    height:700px;
+}
+/***************/
 
 #pageCounter {
     position : relative;
     top : 25px;
     left: 15px;
+}
+
+#createNewGeneButton {
+    margin-bottom: 15px;
 }
 
 #genePositionInputBlock {
@@ -119,23 +135,19 @@
 #geneListFormPrimer {
     position:relative;
     left:100px;
+    margin-bottom:50px;
 }
 
 #geneListFormPrimerAccessionNumber {
     height:141px;
-    position:relative;
-    top:44px;
+    position:absolute;
+    top:-10px;
+    margin-left:10px;
 }
 
 #proteinContent {
-    margin-top:40px;
     position: relative;
     left: 100px;
-}
-
-#Blast-form {
-    position: relative;
-    left: 0px;
 }
 
 #iframe_prot {
@@ -148,4 +160,56 @@
     position: relative;
     left:100px;
     max-height: 600px;
+}
+
+#inputBlastPerso, #inputBlastFile, #inputBlastGene {
+    display:inline;
+}
+
+#inputBlastPerso, #inputBlastFile {
+    display:none;
+}
+
+#blastForm {
+    text-align:center;
+    position:relative;
+    left:360px;
+}
+
+button.large{
+    position:relative;
+    left:25px;
+    width:400px;
+    height:50px;
+}
+
+#selectBlastActions {
+    position:relative;
+    left:24px;
+}
+
+#startBlast {
+    width:450px;
+    height:65px;
+}
+
+.absoluteCaret {
+    position:absolute;
+    left:375px;
+    top:21px;
+}
+
+.blastAction {
+    height:50px;
+}
+
+#inputBlastList, #inputBlastPerso {
+    height:50px;
+    width:324px;
+}
+
+#blastDropdownDb, #blastDropdownType {
+    position:absolute;
+    left:42px;
+    width:395px;
 }

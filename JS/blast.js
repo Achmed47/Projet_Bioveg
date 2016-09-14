@@ -1,44 +1,102 @@
 $(document).ready(function() {
-    var Database_blast = "";
+    var databaseBlast = "";
 
-    $("#geneList").on("click", "li.geneListRow", function() {
-        var numAccession = $(this).data("numaccession");
-        console.log("ok");
-        $("#geneListButton").html(numAccession + "<span class=\"caret\"></span>");
+
+    // Buttons' action
+    $("#selectBlastList").click(function() {
+        activateButton($(this));
+        hideAccessionNumberInputs();
+        $("#inputBlastList").show();
+        checkInputs();
     });
 
-    $("#btn_number_accession").click(function(){
-        $("#list_gene").hide();
-        $("#num_access").show();
+    $("#selectBlastFile").click(function() {
+        activateButton($(this));
+        checkInputs();
     });
 
-    $("#btn_liste_gene").click(function(){
-        $("#num_access").hide();
-        $("#list_gene").show();
+    $("#selectBlastPerso").click(function() {
+        activateButton($(this));
+        hideAccessionNumberInputs();
+        $("#inputBlastPerso").show();
+        checkInputs();
     });
 
-    $("li.liste_dropdown_bd").click(function(){
-        $("#dropdownMenu_bd_blast").html($(this).text()+"<span class=\"caret\"></span>");
-        Database_blast = $(this).data("numaccession");
+    // Changing dropdowns option
+    $("#blastDropdownDb").on("click", "li", function(){
+        $("#dropdownMenuBlastDb").html("<b>" + $(this).text()+"</b><span class=\"caret absoluteCaret\"></span>");
+        databaseBlast = $(this).data("numaccession");
+        checkInputs();
     });
 
-    $("li.liste_dropdown_blast").click(function(){
-        $("#dropdownMenu_blast").html($(this).text()+"<span class=\"caret\"></span>");
+    $("#blastDropdownType").on("click", "li", function(){
+        $("#dropdownMenuBlastType").html("<b>" + $(this).text()+"</b><span class=\"caret absoluteCaret\"></span>");
+        checkInputs();
     });
 
-    $("#start_blast").click(function(){
-        if ($("#num_access").css("display") != "none"){
-            var N_Accession = $("#special_access_number").val();
+    $("#inputBlastList").change(function() {
+        checkInputs();
+    });
+
+    $("#inputBlastPerso").on("change paste keyup", function() {
+        checkInputs();
+    });
+
+    // Submit form action
+    $("#startBlast").click(function(){
+        var numAccession = "";
+        var request      = "";
+        var typeBlast    = $.trim($("#dropdownMenuBlastType").text());
+
+        if ($("#inputBlastPerso").css("display") != "none"){
+            numAccession = $("#inputBlastPerso").val();
+            console.log($("#inputBlastPerso").val());
+        } else {
+            console.log("nb options : " + $('#inputBlastList option').length + " && selected : " + $('#inputBlastList option:selected').data("numaccession"));
+            numAccession = $('#inputBlastList option:selected').data("numaccession");
         }
-        else {
-            var N_Accession = $("#btn_liste_gene").text();
-        };
-        var Type_blast = $("#dropdownMenu_blast").text();
-        var request_html = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?QUERY="+N_Accession+"&DATABASE=nr&EQ_MENU="+Database_blast+"&EQ_OP=AND&PROGRAM="+Type_blast+"&FILTER=L&EXPECT=0.01&FORMAT_TYPE=HTML&NCBI_GI=on&HITLIST_SIZE=10&CMD=Put";
+        console.log("blastPerso : " + $("#inputBlastPerso").css("display") + " && blastList : " + $("#inputBlastList").css("display"));
+        console.log("numAccession : |" + numAccession + "|");
+        console.log("typeBlast : |" + typeBlast + "|");
+        console.log("databaseBlast : |" + databaseBlast + "|");
 
-        console.log(request_html)
+        request = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?QUERY=" + numAccession + "&DATABASE=nr&EQ_MENU=" + databaseBlast + "&EQ_OP=AND&PROGRAM=" + typeBlast + "&FILTER=L&EXPECT=0.01&FORMAT_TYPE=HTML&NCBI_GI=on&HITLIST_SIZE=10&CMD=Put";
 
-        window.open(request_html,"_blank");
+        // console.log(request);
+        //window.open(request, "_blank");
     });
+
+
+    /*** FUNCTION *********/
+    function activateButton($button) {
+        $("#selectBlastActions button.active").removeClass("active");
+        $button.addClass("active");
+    }
+
+    function hideAccessionNumberInputs() {
+        $("#inputBlastFile, #inputBlastList, #inputBlastPerso").hide();
+    }
+
+    function checkInputs() {
+        var disabled = false;
+        var $listGene = $("#inputBlastPerso");
+
+        $("#startBlast").removeClass("disabled");
+
+        if ($listGene.css("display") != "none" && !$listGene.val()){
+            disabled = true;
+        } else if($("#inputBlastList").css("display") != "none" && $('#inputBlastList option:selected').text() == "Accession Number") {
+            disabled = true;
+        }
+
+        if($("#blastDropdownType").text() == "Blast type" || $("#blastDropdownDb").text() == "Database")
+        {
+            disabled = true;
+        }
+
+        if(disabled) {
+            $("#startBlast").addClass("disabled");
+        }
+    }
 
 });

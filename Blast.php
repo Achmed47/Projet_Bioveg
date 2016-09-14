@@ -2,73 +2,78 @@
     include("db/connexion.php");
 ?>
 
-<form class="form-horinzontal" id="Blast-form">
+<form class="form-horinzontal" id="blastForm">
     <div class="row">
-        <div class="btn-group col-md-4" role="group" id=button_group_blast>
-            <button type="button" class="btn btn-default" id="btn_number_accession" >Specific Accession Number</button>
-            <button type="button" class="btn btn-default" id="btn_liste_gene" >Gene list</button>
-        </div>
-        <div id="num_access" class="input-group col-md-4"  style="display: none">
-            <input type="text" class="form-control" placeholder="N°d'accession" id="special_access_number"/>
-        </div>
-        <div class="dropdown input-group col-md-4 " id= "list_gene" style="display: none">
-            <button class="btn btn-default dropdown-toggle" type="button" id="geneListButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Select a gene ...
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" id="geneList" aria-labelledby="dropdownMenu1">
-            <?php
-            $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
-            $result = $conn->query($sql);
-            while($row = $result->fetch_assoc()) {
-                echo "<li data-numaccession=\"".$row["NUM_ACCESSION"]."\" data-id=\"".$row["ID"]."\" class=\"geneListRow\"><a href=\"#\">".$row["NAME"]." (".$row["NUM_ACCESSION"].")</a></li>";
-            }
-            ?>
-            </ul>
+        <div class="col-lg-6">
+            <div class="input-group" id="selectBlastActions">
+                <span class="input-group-btn">
+                    <button class="btn btn-default active blastAction" id="selectBlastList" type="button"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></button>
+                    <button id="selectBlastPerso" class="btn btn-default blastAction" type="button"><span class="glyphicon glyphicon-text-width" aria-hidden="true"></span></button>
+<!--                    <button class="btn btn-default blastAction" id="selectBlastFile" type="button"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>-->
+                </span>
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+                <input id="inputBlastPerso" type="text" class="form-control blastAction" placeholder=" Accession Number">
+<!--
+                <span id="inputBlastFile">
+                    <label class="custom-file">
+                      <input type="file" id="file" class="custom-file-input">
+                      <span class="custom-file-control"></span>
+                    </label>
+                </span>
+                -->
+                <select id="inputBlastList" class="form-control blastAction">
+                    <option data-numaccession="" disabled selected>Accession Number</option>
                 <?php
-                $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
-                $result = $conn->query($sql);
-                while($row = $result->fetch_assoc()) {
-                    echo "<li data-id=\"".$row["ID"]."\" class=\"geneListRow\"><a href=\"#\">".$row["NAME"]." (".$row["NUM_ACCESSION"].")</a></li>";
-                }
-                ?>
-            </ul>
+                        $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
+                        $result = $conn->query($sql);
+                        while($row = $result->fetch_assoc()) {
+                            echo "<option data-numaccession=\"".$row["NUM_ACCESSION"]."\" data-id=\"".$row["ID"]."\" class=\"geneListRow\">".$row["NUM_ACCESSION"]." (".$row["NAME"].")</option>";
+                        }
+                        ?>
+                </select>
+
+            </div>
         </div>
     </div>
+
     <br/>
+
     <div class="row">
         <div class="dropdown col-md-4">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu_blast" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Select a blast ...
-                <span class="caret"></span>
+            <button class="btn btn-default dropdown-toggle large" id="dropdownMenuBlastType" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <b>Blast type</b>
+                <span class="caret absoluteCaret"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li class="liste_dropdown_blast"><a>blastn</a></li>
-                <li class="liste_dropdown_blast"><a>tblastn</a></li>
-                <li class="liste_dropdown_blast"><a>blastx</a></li>
-                <li class="liste_dropdown_blast"><a>blastp</a></li>
+            <ul class="dropdown-menu" id="blastDropdownType" aria-labelledby="dropdownMenu1">
+                <li><a>blastn </a></li>
+                <li><a>tblastn </a></li>
+                <li><a>blastx </a></li>
+                <li><a>blastp </a></li>
             </ul>
         </div>
     </div>
+
     <br/>
+
     <div class="row">
         <div class="dropdown col-md-4">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu_bd_blast" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Select a database ...
-                <span class="caret"></span>
+            <button class="btn btn-default dropdown-toggle large" type="button" id="dropdownMenuBlastDb" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <b>Database</b>
+                <span class="caret absoluteCaret"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu_bd_blast">
-                <li class="liste_dropdown_bd" data-numaccession="Vitis vinifera (taxid:29760)"><a>Vitis vinifera</a></li>
-                <li class="liste_dropdown_bd" data-numaccession="Eutypa lata (taxid:97096)"><a>Eutypa Lata </a></li>
+            <ul class="dropdown-menu" id="blastDropdownDb" aria-labelledby="dropdownMenu_bd_blast">
+                <li data-numaccession="Vitis vinifera (taxid:29760)"><a>Vitis vinifera</a></li>
+                <li data-numaccession="Eutypa lata (taxid:97096)"><a>Eutypa Lata</a></li>
             </ul>
         </div>
     </div>
+
     <br/>
+
     <div class="row">
         <div class="col-md-4">
-            <button class="btn btn-primary btn-lg btn-block" type="button" id="start_blast">Blast</button>
+            <button class="btn btn-primary btn-lg btn-block disabled" type="button" id="startBlast">Blast</button>
         </div>
     </div>
 </form>
