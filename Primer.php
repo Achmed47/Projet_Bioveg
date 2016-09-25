@@ -14,21 +14,22 @@
             $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
             $result = $conn->query($sql);
             while($row = $result->fetch_assoc()) {
-                echo "<li data-numaccession=\"".$row["NUM_ACCESSION"]."\" data-id=\"".$row["ID"]."\" class=\"geneListRow\"><a href=\"#\">".$row["NAME"]." </a></li>";
+                echo "<li data-numaccession=\"".$row["NUM_ACCESSION"]."\" data-id=\"".$row["ID"]."\" class=\"geneListRow\"><a href=\"#\">".$row["NAME"]." (".$row["NUM_ACCESSION"].")</a></li>";
             }
             ?>
             </ul>
         </div>
     </div>
+</form>
 
-    <div class="form-group" id="geneListFormPrimerAccessionNumber">
-        <div class="panel panel-default">
-          <div class="panel-body">
-              Corresponding accession number
-          </div>
+<div class="input-group">
+    <div class="panel panel-body">
+        <img src="Web/css/spin.svg" id="loadingGifPrimer" alt="Loading genome ..." style="display:none;width:64px;height:64px;" />
+
+        <div id="geneSequencePrimer">
         </div>
     </div>
-</form>
+</div>
 
 <iframe id="iframe_primer" width="900" height="1000" frameborder="0" marginheight="0" marginwidth="0" src="http://www.ncbi.nlm.nih.gov/tools/primer-blast/" style="align=center"></iframe>
 

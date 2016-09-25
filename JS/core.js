@@ -2,6 +2,7 @@ $( document ).ready(function() {
 
     // Loading genome visualization by default
     $( "#contentGlobal" ).load( "Genome_visualization.html" );
+    $.getScript("JS/data.js").done(function(script, status, jqxhr) { });
     $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) { });
 
     // Menu actions
@@ -12,6 +13,7 @@ $( document ).ready(function() {
 
     $("#genome").click(function(){
         $( "#contentGlobal" ).load( "Genome_visualization.html" );
+        $.getScript("JS/data.js").done(function(script, status, jqxhr) { });
         $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) { });
     });
 

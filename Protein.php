@@ -4,11 +4,6 @@
 
 <div id="proteinContent">
     <div class="dropdown" id>
-        <div class="btn-group col-md-4" role="group" id=button_group_blast>
-            <button type="button" class="btn btn-default" id="btn_liste_gene" >Gene list</button>
-            <button type="button" class="btn btn-default" id="btn_sequence" >Personal sequence</button>
-        </div>
-
         <button class="btn btn-default dropdown-toggle" type="button" id="geneListButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Select a gene ...
             <span class="caret"></span>

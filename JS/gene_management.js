@@ -43,6 +43,7 @@ $( document ).ready(function() {
                     successAlert("The gene <b>" + id + " (" + name + ")</b> has been deleted.");
                     $("#lineId" + id).remove();
                     updatePagination(false);
+                    updatePlotDataFile();
                 } else {
                     failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + name + ")</b> could not be deleted.");
                 }
@@ -127,6 +128,7 @@ $( document ).ready(function() {
                 {
                     successAlert("The " + type + " " + name + " has been deleted.");
                     $line.remove();
+                    updatePlotDataFile();
                 } else {
                     failAlert("<strong>Error :</strong> The " + type + " could not be deleted.");
                 }
@@ -167,6 +169,7 @@ $( document ).ready(function() {
                 if(status == "success" && json_result == "1") {
                     successAlert("The " + type + " <b>" + name + "</b> has been created.");
                     updateGeneComponentTable(id, type);
+                    updatePlotDataFile();
                 } else {
                     failAlert("<strong>Error :</strong> The " + type + " <b>" + name + "</b> could not be created.");
                 }
@@ -225,6 +228,7 @@ $( document ).ready(function() {
             success : function(json_result, status) {
                 if(status == "success" && json_result == "1") {
                     successAlert("Data has been updated.");
+                    updatePlotDataFile();
                 } else {
                     failAlert("<strong>Error :</strong> The update could not be done.");
                 }
@@ -301,6 +305,8 @@ $( document ).ready(function() {
                     $("tr#lineId" + id + " td.geneActions").data("start", positionStart);
                     $("tr#lineId" + id + " td.geneActions").data("end", positionEnd);
                     $("tr#lineId" + id + " td.geneActions").data("sequence", sequence);
+
+                    updatePlotDataFile();
                 } else {
                     failAlert("<strong>Error :</strong> The gene <b>" + id + " (" + name + ")</b> could not be updated.");
                 }
@@ -337,6 +343,7 @@ $( document ).ready(function() {
                 if(status == "success" && json_result == "1") {
                     successAlert("The gene <b>" + name + "</b> has been created.");
                     updatePagination(true);
+                    updatePlotDataFile();
                 } else {
                     failAlert("<strong>Error :</strong> The gene <b>" + name + "</b> could not be created.");
                 }
@@ -413,6 +420,7 @@ $( document ).ready(function() {
                 if(status == "success") {
                     $("#geneComponentTable tbody tr").remove();
                     $("#geneComponentTable tbody").append(html_result);
+                    updatePlotDataFile();
                 } else {
                     failAlert("<strong>Error :</strong> Gene components could not be loaded.");
                 }
@@ -432,10 +440,10 @@ $( document ).ready(function() {
             failAlert("<strong>Error :</strong> Check sequence's field. It must be DNA sequence.");
         }
 
-        if(!$("#geneAccessionNumber").val()) {
+        /*if(!$("#geneAccessionNumber").val()) {
             $("#geneAccessionNumber").parent().addClass("has-error");
             failAlert("<strong>Error :</strong> The accession number must be provided in order to create a new gene.");
-        }
+        }*/
 
         var start = parseInt($("#genePositionStart").val());
         var end   = parseInt($("#genePositionEnd").val());
@@ -477,6 +485,27 @@ $( document ).ready(function() {
         }
 
         return ($(".has-error").length > 0) ? false : true;
+    }
+
+    function updatePlotDataFile() {
+        $.ajax({
+            url  : "db/create_plot_data.php",
+            type : "POST",
+            data : "",
+            dataType : "html",
+
+            success : function(html_result, status) {
+                if(status == "success" && html_result === "done") {
+                    console.log("ok");
+                } else {
+                    failAlert("<strong>Error :</strong> Genome visualization's data file couldn't been updated.");
+                }
+            },
+
+            error : function(result, status, error) {
+                failAlert("<strong>Error :</strong> Genome visualization's data file couldn't been updated.");
+            }
+        });
     }
     /*****************************************************/
 

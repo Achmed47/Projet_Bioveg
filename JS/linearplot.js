@@ -6,7 +6,6 @@ var linearTrackDefaults = {
     bottom_margin: 5,
     axis_height: 50,
     name: "defaultlinear",
-    dragresize: true
 };
 
 function genomeTrack(layout,tracks) {
@@ -152,7 +151,8 @@ function genomeTrack(layout,tracks) {
 	.attr('class', 'd3-tip')
 	.offset([-10, 0])
 	.html(function(d) {
-		return "<strong>Name:</strong> <span style='color:red'>" + d.name + "</span>";
+		return "<strong>Name:</strong> <span style='color:red'>" + d.name + "</span><br/>\
+                <strong>Position:</strong> <span style='color:orange'>" + d.start + " .. " + d.end + "</span>";
 	    });
 
     this.chart.call(this.tip);

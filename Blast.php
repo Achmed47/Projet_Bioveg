@@ -1,5 +1,5 @@
 <?php
-    include("db/connexion.php");
+include("db/connexion.php");
 ?>
 
 <form class="form-horinzontal" id="blastForm">
@@ -9,29 +9,29 @@
                 <span class="input-group-btn">
                     <button class="btn btn-default active blastAction" id="selectBlastList" type="button"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></button>
                     <button id="selectBlastPerso" class="btn btn-default blastAction" type="button"><span class="glyphicon glyphicon-text-width" aria-hidden="true"></span></button>
-<!--                    <button class="btn btn-default blastAction" id="selectBlastFile" type="button"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>-->
+                    <!--                    <button class="btn btn-default blastAction" id="selectBlastFile" type="button"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>-->
                 </span>
 
-                <input id="inputBlastPerso" type="text" class="form-control blastAction" placeholder=" NCBI gi number / FASTA sequence">
+                <input id="inputBlastPerso" type="text" class="form-control blastAction" placeholder="gi| XXXXXXXXX / FASTA sequence" />
 
-<!--
-                <span id="inputBlastFile">
-                    <label class="custom-file">
-                      <input type="file" id="file" cl   ass="custom-file-input">
-                      <span class="custom-file-control"></span>
-                    </label>
-                </span>
-                -->
+                <!--
+<span id="inputBlastFile">
+<label class="custom-file">
+<input type="file" id="file" cl   ass="custom-file-input">
+<span class="custom-file-control"></span>
+</label>
+</span>
+-->
 
                 <select id="inputBlastList" class="form-control blastAction">
                     <option data-numaccession="" disabled selected>Select a gene ...</option>
-                <?php
-                        $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
-                        $result = $conn->query($sql);
-                        while($row = $result->fetch_assoc()) {
-                            echo "<option data-numaccession=\"".$row["NUM_ACCESSION"]."\" data-id=\"".$row["ID"]."\" class=\"geneListRow\">".$row["NUM_ACCESSION"]." (".$row["NAME"].")</option>";
-                        }
-                        ?>
+                    <?php
+                    $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()) {
+                        echo "<option data-numaccession=\"".$row["NUM_ACCESSION"]."\" data-id=\"".$row["ID"]."\" class=\"geneListRow\">".$row["NUM_ACCESSION"]." (".$row["NAME"].")</option>";
+                    }
+                    ?>
                 </select>
 
             </div>
@@ -65,7 +65,13 @@
             </button>
             <ul class="dropdown-menu" id="blastDropdownDb" aria-labelledby="dropdownMenu_bd_blast">
                 <li data-numaccession="Vitis vinifera (taxid:29760)"><a>Vitis vinifera</a></li>
-                <li data-numaccession="Eutypa lata (taxid:97096)"><a>Eutypa Lata</a</li>
+                <li data-numaccession="Eutypa lata (taxid:97096)"><a>Eutypa Lata</a></li>
+                <li data-numaccession="Botrytis cinerea (taxid:40559)"><a>Botrytis cinerea </a></li>
+                <li data-numaccession="Diplodia seriata (taxid:420778)"><a>Diplodia seriata </a></li>
+                <li data-numaccession="Neofusicoccum parvum (taxid:310453))"><a>Neofusicoccum parvum </a></li>
+                <li data-numaccession="Phaeoacremonium aleophilum (taxid:223192)"><a>Phaeoacremonium aleophilum </a></li>
+                <li data-numaccession="Fomitiporia mediterranea (taxid:208960)"><a>Fomitiporia mediterranea </a></li>
+                <li data-numaccession="Phaeomoniella chlamydospora (taxid:158046)"><a>Phaemoniella chlamydospora </a></li>
             </ul>
         </div>
     </div>

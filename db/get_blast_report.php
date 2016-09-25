@@ -2,19 +2,14 @@
 
 include("connexion.php");
 
-$geneId = isset($_GET['geneId']) ? $_GET["geneId"] : "";
-$sequence     = isset($_GET['sequence']) ? $_GET["sequence"] : "";
-$type         = isset($_GET['typeBlast']) ? $_GET["typeBlast"] : "";
-$database     = isset($_GET['database']) ? $_GET["database"] : "";
+$geneId   = isset($_POST['geneId']) ? $_POST["geneId"] : "";
+$sequence = isset($_POST['sequence']) ? $_POST["sequence"] : "";
+$type     = isset($_POST['typeBlast']) ? $_POST["typeBlast"] : "";
+$database = isset($_POST['database']) ? $_POST["database"] : "";
+$db       = isset($_POST['db']) ? $_POST["db"] : "";
 
-if((strcmp($geneId, "") != 0 || strcmp($sequence, "") != 0) && strcmp($type, "") != 0 && strcmp($database, "") != 0) {
+if((strcmp($geneId, "") != 0 || strcmp($sequence, "") != 0) && strcmp($type, "") != 0 && strcmp($database, "") != 0 && strcmp($db, "") != 0) {
     $curlSession = curl_init();
-
-    // TODO
-    // - Implement Blastx => check num_accesion to access prot seq in KEGG file
-    //   If not existing, return error
-    // - Make specific error depending on the issue
-    // - Implement tblastn && blastp based on blastn and blastx
 
     if(strcmp($geneId, "") != 0) {
         $sql = "SELECT SEQ FROM genes WHERE ID=$geneId";
@@ -26,7 +21,7 @@ if((strcmp($geneId, "") != 0 || strcmp($sequence, "") != 0) && strcmp($type, "")
         $data = (count($match) > 1 && strcmp($match[1], "") != 0) ? $match[1] : $sequence;
     }
 
-    $url = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?QUERY=".urlencode($data)."&DATABASE=nr+nt&EQ_MENU=".urlencode($database)."&EQ_OP=AND&PROGRAM=".urlencode($type)."&FILTER=L&EXPECT=0.01&FORMAT_TYPE=HTML&NCBI_GI=on&HITLIST_SIZE=10&CMD=Put";
+    $url = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?QUERY=".urlencode($data)."&DATABASE=".$db."&EQ_MENU=".urlencode($database)."&EQ_OP=AND&PROGRAM=".urlencode($type)."&FILTER=L&EXPECT=0.01&FORMAT_TYPE=HTML&NCBI_GI=on&HITLIST_SIZE=10&CMD=Put";
 
     curl_setopt($curlSession, CURLOPT_URL, $url);
 

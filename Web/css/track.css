@@ -62,14 +62,14 @@
 }
 
 /* Definitions for first stranded track, colour, stroke */
-.track1_pos {
+.genes_pos {
     fill: darksalmon;
     stroke: #d1876d;
     stroke-opacity: 0.8;
     stroke-width: 1;
 }
 
-.track1_neg {
+.genes_neg {
     fill: #FFCC00;
     fill-opacity: .7;
     /*stroke-width: 1;
@@ -78,7 +78,7 @@
 
 /* In a linear track if an intergenic
    region is defined, give it a colour */
-.track1_none {
+.genes_none {
     fill: #cccccc;
     fill-opacity: .7;
     stroke-width: 1;
@@ -86,13 +86,13 @@
 
 /* And we want to show the user as they hover
    over a track, change the colour */
-.track1_pos:hover {
+.genes_pos:hover {
     fill: red;
     stroke-width: 1;
     stroke: 1;
 }
 
-.track1_neg:hover {
+.genes_neg:hover {
     fill: red;
     fill-opacity: .9;
     stroke-width: 1;
@@ -102,13 +102,13 @@
 /* In a linear track, if there are regulatory
    elements such as transcription factors and
    terminators, give them a colour for the stroke */
-.track1_arrow_pos, .track1_arrow_neg, .track3_arrow {
+.genes_arrow_pos, .genes_arrow_neg, .introns_arrow {
     stroke-width: 1;
     stroke: black;
 }
 
 /* Labels on the linear track */
-.track1_text {
+.genes_text {
     fill: white;
     font-weight: bold;
     font: 12px arial;
@@ -116,7 +116,7 @@
 
 /* Track 2 is also a stranded track, give it
    a different set of colours */
-.track2_pos {
+.exons_pos {
     fill: #000099;
     fill-opacity: .7;
 }
@@ -124,23 +124,23 @@
 /* When a linear track is zoomed to the point
    it's text is visible an extra class is added
    to the element we can hook in to */
-.track2_pos_zoomed {
+.exons_pos_zoomed {
     stroke-width: 1px;
     stroke: #647381;
 }
 
-.track2_neg {
+.exons_neg {
     fill: #006600;
     fill-opacity: .7;
 }
 
-.track2_neg_zoomed {
+.exons_neg_zoomed {
     stroke-width: 1px;
     stroke: #007300;
     stroke-opacity: 0.7;
 }
 
-.track2_text {
+.exons_text {
     fill: white;
     font-weight: bold;
     font: 12px arial;
@@ -148,17 +148,17 @@
 
 /* Track 3 is a non-stranded track, so no _pos
    and _neg modifiers on the classes */
-.track3 {
+.introns {
     fill: #3399FF;
     fill-opacity: .7;
 }
 
-.track3:hover {
+.introns:hover {
     fill: blue;
     fill-opacity: .9;
 }
 
-.track3_text {
+.introns_text {
     fill: white;
     font-weight: bold;
     font: 12px arial;
@@ -167,16 +167,6 @@
 /* The GC Plot type track, give the stroke a colour */
 .gcplot {
     stroke: black;
-}
-
-/* Track 5 is the glyphs, classes of a concatenation
-   of the track name and the type of glyph in the track */
-.track5_vfdb {
-    fill: #663300;
-}
-
-.track5_adb {
-    fill: #FF9933;
 }
 
 /* Give a colour to the glyph track's stroke */
