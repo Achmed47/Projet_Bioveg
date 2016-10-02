@@ -1083,8 +1083,25 @@ genomeTrack.prototype.redraw = function() {
     }
 
     this.axisContainer.select(".xaxislinear").call(this.xAxis);
-
+    bindEvents();
 }
+
+
+function bindEvents() {
+    $(".genes_none").on("mouseover", function() {
+        console.log("ok");
+        $(".geneComponentsHover").removeClass("geneComponentsHover");
+
+        var numAccession = $(this).next().text();
+
+        $(".exons_text, .introns_text").each(function() {
+            if($(this).text().indexOf(numAccession) >= 0) {
+                $(this).parent().addClass("geneComponentsHover");
+            }
+        });
+    });
+}
+
 
 genomeTrack.prototype.rescale = function() {
     var cfg = this.layout;

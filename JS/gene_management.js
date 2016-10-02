@@ -440,11 +440,6 @@ $( document ).ready(function() {
             failAlert("<strong>Error :</strong> Check sequence's field. It must be DNA sequence.");
         }
 
-        /*if(!$("#geneAccessionNumber").val()) {
-            $("#geneAccessionNumber").parent().addClass("has-error");
-            failAlert("<strong>Error :</strong> The accession number must be provided in order to create a new gene.");
-        }*/
-
         var start = parseInt($("#genePositionStart").val());
         var end   = parseInt($("#genePositionEnd").val());
 

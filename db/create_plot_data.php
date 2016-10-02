@@ -69,20 +69,34 @@
                     "start"  => intval($row["START"]),
                     "end"    => intval($row["END"]),
                     "name"   => $row["gcName"]." (".$row["gName"].")",
-                    "geneAN"   => $row["NUM_ACCESSION"]
-//                    "strand" => (intval($row["INTRON"]) == 0) ? -1 : -5
+                    "geneAN" => $row["NUM_ACCESSION"]
                 );
 
                 if(intval($row["INTRON"])) {
-                    $exons[] = $geneComponent;
-                } else {
                     $introns[] = $geneComponent;
+                } else {
+                    $exons[] = $geneComponent;
                 }
             }
 
             $sql = "SELECT max(END) as maxEnd from gene_components";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
+
+            $track = array(
+                "trackName" => "exons",
+                "trackType" => "stranded",
+                "visible" => true,
+                "inner_radius" => 165,
+                "outer_radius" => 190,
+                "featureThreshold" => intval($row["maxEnd"]),
+                "mouseover_callback" => 'islandPopup',
+                "mouseout_callback" => 'islandPopupClear',
+                "showLabels" => true,
+                "showTooltip" => true,
+                "items" => $exons
+            );
+            $tracks[] = $track;
 
             $track = array(
                 "trackName" => "introns",
@@ -99,20 +113,7 @@
             );
             $tracks[] = $track;
 
-            $track = array(
-                "trackName" => "exons",
-                "trackType" => "stranded",
-                "visible" => true,
-                "inner_radius" => 165,
-                "outer_radius" => 190,
-                "featureThreshold" => intval($row["maxEnd"]),
-                "mouseover_callback" => 'islandPopup',
-                "mouseout_callback" => 'islandPopupClear',
-                "showLabels" => true,
-                "showTooltip" => true,
-                "items" => $exons
-            );
-            $tracks[] = $track;
+
 
             $htmlResult = "done";
 

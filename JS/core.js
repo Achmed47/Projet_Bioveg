@@ -1,9 +1,14 @@
+$.getScript("JS/data.js").done(function(script, status, jqxhr) { });
+
 $( document ).ready(function() {
 
     // Loading genome visualization by default
     $( "#contentGlobal" ).load( "Genome_visualization.html" );
-    $.getScript("JS/data.js").done(function(script, status, jqxhr) { });
+
+    $.getScript("JS/linearbrush.js").done(function(script, status, jqxhr) { });
+    $.getScript("JS/linearplot.js").done(function(script, status, jqxhr) { });
     $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) { });
+
 
     // Menu actions
     $("ul.nav li").click(function(){
@@ -14,6 +19,8 @@ $( document ).ready(function() {
     $("#genome").click(function(){
         $( "#contentGlobal" ).load( "Genome_visualization.html" );
         $.getScript("JS/data.js").done(function(script, status, jqxhr) { });
+        $.getScript("JS/linearbrush.js").done(function(script, status, jqxhr) { });
+        $.getScript("JS/linearplot.js").done(function(script, status, jqxhr) { });
         $.getScript("JS/linearplot_test.js").done(function(script, status, jqxhr) { });
     });
 

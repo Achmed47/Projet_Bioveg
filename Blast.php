@@ -12,7 +12,7 @@ include("db/connexion.php");
                     <!--                    <button class="btn btn-default blastAction" id="selectBlastFile" type="button"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></button>-->
                 </span>
 
-                <input id="inputBlastPerso" type="text" class="form-control blastAction" placeholder="gi| XXXXXXXXX / FASTA sequence" />
+                <textarea id="inputBlastPerso" type="text" class="form-control blastAction" placeholder="gi| XXXXXXXXX / FASTA sequence" />
 
                 <!--
 <span id="inputBlastFile">

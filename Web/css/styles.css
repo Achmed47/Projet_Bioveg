@@ -7,14 +7,6 @@
     font-family: Verdana, Geneva, sans-serif;
 }
 
-.nav:hover {
-/*   background-color: #8ae73c;*/
-}
-
-.nav  > li > a {
-/*  color: #34be3f;*/
-}
-
 #menuGlobal {
     width:1170px;
     position:relative;
@@ -211,8 +203,15 @@ footer {
 
 #iframe_primer {
     position: relative;
+    top:-50px;
     left:100px;
     max-height: 600px;
+}
+
+/** blast page *************************/
+#inputBlastPerso {
+    max-height: 300px;
+    max-width: 540px;
 }
 
 #inputBlastPerso, #inputBlastFile, #inputBlastGene {
@@ -224,8 +223,8 @@ footer {
 }
 
 #blastForm {
-    text-align:center;
     position:relative;
+    left:20px;
     left:360px;
 }
 
@@ -234,6 +233,11 @@ button.large{
     left:25px;
     width:400px;
     height:50px;
+}
+
+#blastDropdownDb, #blastDropdownType {
+    margin-left:45px;
+    width:395px;
 }
 
 #selectBlastActions {
@@ -261,12 +265,6 @@ button.large{
     width:324px;
 }
 
-#blastDropdownDb, #blastDropdownType {
-    position:absolute;
-    left:42px;
-    width:395px;
-}
-
 #loadingGifBlast {
     display:none;
     width:35px;
@@ -276,16 +274,17 @@ button.large{
     20px
 }
 
-#loadingGifPrimer {
-    position: relative;
-    left: 100px;
-    top: 20px;
-}
-
 #blastAlert {
     width:900px;
     position: relative;
     left:-210px;
+}
+/***************************************/
+
+#loadingGifPrimer {
+    position: relative;
+    left: 100px;
+    top: 20px;
 }
 
 #geneSequencePrimer {

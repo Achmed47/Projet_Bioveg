@@ -10,7 +10,7 @@
         </button>
         <ul class="dropdown-menu" id="geneList" aria-labelledby="dropdownMenu1">
             <?php
-            $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes ORDER BY NAME";
+            $sql = "SELECT ID, NAME, NUM_ACCESSION FROM genes WHERE NUM_ACCESSION != '' ORDER BY NAME";
             $result = $conn->query($sql);
             while($row = $result->fetch_assoc()) {
                 echo "<li data-numaccession=\"".$row["NUM_ACCESSION"]."\" data-id=\"".$row["ID"]."\" class=\"geneListRow\"><a href=\"#\">".$row["NAME"]." (".$row["NUM_ACCESSION"].")</a></li>";

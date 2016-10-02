@@ -30,3 +30,22 @@ function redirectGene(trackName, d) {
         window.open('http://www.ncbi.nlm.nih.gov/gene/?term=' + d.numAccession, '_blank');
     }
 }
+
+$( document ).ready(function() {
+    bindEvents();
+});
+
+function bindEvents() {
+    $(".genes_none").on("mouseover", function() {
+        console.log("ok");
+        $(".geneComponentsHover").removeClass("geneComponentsHover");
+
+        var numAccession = $(this).next().text();
+
+        $(".exons_text, .introns_text").each(function() {
+            if($(this).text().indexOf(numAccession) >= 0) {
+                $(this).parent().addClass("geneComponentsHover");
+            }
+        });
+    });
+}

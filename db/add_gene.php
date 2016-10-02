@@ -8,7 +8,7 @@ $accessionNumber = isset($_POST['accession']) ? $_POST["accession"] : "";
 $sequence = isset($_POST['sequence']) ? $_POST["sequence"] : "";
 $name = isset($_POST['name']) ? $_POST["name"] : "";
 
-if(is_numeric($positionStart) && $positionStart > 0 && is_numeric($positionEnd) && $positionEnd > 0 && $accessionNumber != "" && $name != "")
+if(is_numeric($positionStart) && $positionStart > 0 && is_numeric($positionEnd) && $positionEnd > 0 && $name != "")
 {
     $positionStart = (int) $positionStart;
     $positionEnd = (int) $positionEnd;

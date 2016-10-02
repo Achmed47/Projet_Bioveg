@@ -69,34 +69,21 @@
     stroke-width: 1;
 }
 
-.genes_neg {
-    fill: #FFCC00;
-    fill-opacity: .7;
-    /*stroke-width: 1;
-    stroke: #4c602a;*/
-}
-
 /* In a linear track if an intergenic
    region is defined, give it a colour */
 .genes_none {
-    fill: #cccccc;
-    fill-opacity: .7;
+    fill: #2e6830;
+    fill-opacity: .8;
+    height:40px;
     stroke-width: 1;
 }
 
 /* And we want to show the user as they hover
    over a track, change the colour */
-.genes_pos:hover {
-    fill: red;
+.genes:hover {
+    fill: #59cc5f;
     stroke-width: 1;
     stroke: 1;
-}
-
-.genes_neg:hover {
-    fill: red;
-    fill-opacity: .9;
-    stroke-width: 1;
-    stroke: red;
 }
 
 /* In a linear track, if there are regulatory
@@ -114,16 +101,14 @@
     font: 12px arial;
 }
 
-/* Track 2 is also a stranded track, give it
-   a different set of colours */
-.exons_pos {
-    fill: #000099;
-    fill-opacity: .7;
-}
-
 /* When a linear track is zoomed to the point
    it's text is visible an extra class is added
    to the element we can hook in to */
+.exons {
+    fill: #5272a5;
+    fill-opacity: .7;
+}
+
 .exons_pos_zoomed {
     stroke-width: 1px;
     stroke: #647381;
@@ -149,13 +134,8 @@
 /* Track 3 is a non-stranded track, so no _pos
    and _neg modifiers on the classes */
 .introns {
-    fill: #3399FF;
+    fill: #1f95ef;
     fill-opacity: .7;
-}
-
-.introns:hover {
-    fill: blue;
-    fill-opacity: .9;
 }
 
 .introns_text {
@@ -164,6 +144,10 @@
     font: 12px arial;
 }
 
+.geneComponentsHover {
+    fill: #2d5ead;
+    fill-opacity: .9;
+}
 /* The GC Plot type track, give the stroke a colour */
 .gcplot {
     stroke: black;
