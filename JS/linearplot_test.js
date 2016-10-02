@@ -32,12 +32,15 @@ function redirectGene(trackName, d) {
 }
 
 $( document ).ready(function() {
+    $('#geneSelect').select2({
+        placeholder: "Filter gene(s)"
+    });
+
     bindEvents();
 });
 
 function bindEvents() {
     $(".genes_none").on("mouseover", function() {
-        console.log("ok");
         $(".geneComponentsHover").removeClass("geneComponentsHover");
 
         var numAccession = $(this).next().text();
@@ -48,4 +51,41 @@ function bindEvents() {
             }
         });
     });
+
+    $("#geneSelect").on("change", function() {
+        var nbGeneSelected = $(".select2-selection__rendered li").length;
+
+        if(nbGeneSelected > 1) {
+            updateDisplayedGenes();
+        } else {
+            $(".exons_none, .introns_none, .genes_none").show();
+        }
+    });
+}
+
+function updateDisplayedGenes() {
+    var selectedGenes = [];
+
+    $(".exons_none, .introns_none, .genes_none").show();
+
+    $(".select2-selection__rendered li").each(function() {
+        var content = $(this).text();
+
+        if(content !== "") {
+            selectedGenes.push(content.substr(1));
+        }
+    });
+
+    $(".exons_none, .introns_none, .genes_none").each(function() {
+        var re = /.+\((.+)\)/;
+        var numAccession = $(this).next().text();
+        numAccession = numAccession.replace(re, "$1");
+
+
+        if(selectedGenes.indexOf(numAccession) == -1) {
+            $(this).hide();
+        }
+    });
+
+
 }

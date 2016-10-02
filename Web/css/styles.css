@@ -281,6 +281,11 @@ button.large{
 }
 /***************************************/
 
+#geneSelectContainer {
+    position:relative;
+    left:115px;
+}
+
 #loadingGifPrimer {
     position: relative;
     left: 100px;
@@ -311,4 +316,8 @@ button.large{
 #geneManagementGlobal {
     position:relative;
     top:-55px;
+}
+
+#geneManagementAlert {
+    margin-top:32px;
 }

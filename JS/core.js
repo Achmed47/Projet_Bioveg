@@ -3,7 +3,7 @@ $.getScript("JS/data.js").done(function(script, status, jqxhr) { });
 $( document ).ready(function() {
 
     // Loading genome visualization by default
-    $( "#contentGlobal" ).load( "Genome_visualization.html" );
+    $( "#contentGlobal" ).load( "Genome_visualization.php" );
 
     $.getScript("JS/linearbrush.js").done(function(script, status, jqxhr) { });
     $.getScript("JS/linearplot.js").done(function(script, status, jqxhr) { });
@@ -17,7 +17,7 @@ $( document ).ready(function() {
     });
 
     $("#genome").click(function(){
-        $( "#contentGlobal" ).load( "Genome_visualization.html" );
+        $( "#contentGlobal" ).load( "Genome_visualization.php" );
         $.getScript("JS/data.js").done(function(script, status, jqxhr) { });
         $.getScript("JS/linearbrush.js").done(function(script, status, jqxhr) { });
         $.getScript("JS/linearplot.js").done(function(script, status, jqxhr) { });
