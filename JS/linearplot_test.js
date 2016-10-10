@@ -1,64 +1,51 @@
-var linearlayout = { genomesize: 70049,
+var linearTrack;
+var brush;
+var linearlayout = { genomesize: 256179,
                      height: 250,
                      width: 900,
                      container: '#linearchart',
                      initStart: 0,
-                     initEnd: 70049
+                     initEnd: 256179
                     };
 
-var contextLayout = { genomesize: 70049,
+var contextLayout = { genomesize: 20000,
                       container: '#brush' };
 
-var linearTrack = new genomeTrack(linearlayout, tracks);
-var brush = new linearBrush(contextLayout,linearTrack);
-linearTrack.addBrushCallback(brush);
-
-window.onload = function() {
-  if('undefined' !== typeof cTrack) {
-    console.log('Hooking up circular plot callback');
-    linearTrack.addBrushCallback(cTrack);
-    brush.addBrushCallback(cTrack);
-  }
-}
-
-function resizeLinearPlot() {
-    linearTrack.resize(1000);
-}
-
 function redirectGene(trackName, d) {
-    if(d.numAccession != '') {
-        window.open('http://www.ncbi.nlm.nih.gov/gene/?term=' + d.numAccession, '_blank');
+    console.log(d);
+    if(d.geneAN != '' && d.geneAN != undefined) {
+        window.open('http://www.ncbi.nlm.nih.gov/gene/?term=' + d.geneAN, '_blank');
     }
 }
 
 $( document ).ready(function() {
+    resetDisplayedGenes();
+
     $('#geneSelect').select2({
-        placeholder: "Filter gene(s)"
+        placeholder: 'Filter gene(s)'
     });
 
     bindEvents();
 });
 
 function bindEvents() {
-    $(".genes_none").on("mouseover", function() {
-        $(".geneComponentsHover").removeClass("geneComponentsHover");
+    $plot = $('#geneSelect').select2();
 
-        var numAccession = $(this).next().text();
-
-        $(".exons_text, .introns_text").each(function() {
-            if($(this).text().indexOf(numAccession) >= 0) {
-                $(this).parent().addClass("geneComponentsHover");
-            }
-        });
+    $('#geneSelect').on('select2:unselect', function(e) {
+        console.log("unselect");
+        $plot.select2("close");
     });
 
-    $("#geneSelect").on("change", function() {
-        var nbGeneSelected = $(".select2-selection__rendered li").length;
+    $('#geneSelect').on('select2:select', function(e) {
+        console.log("select");
+//        $plot.select2("open");
+    });
 
-        if(nbGeneSelected > 1) {
+    $('#geneSelect').on('change', function() {
+        if(countSelectedGenes() > 1) {
             updateDisplayedGenes();
         } else {
-            $(".exons_none, .introns_none, .genes_none").show();
+            resetDisplayedGenes();
         }
     });
 }
@@ -66,26 +53,70 @@ function bindEvents() {
 function updateDisplayedGenes() {
     var selectedGenes = [];
 
-    $(".exons_none, .introns_none, .genes_none").show();
+    $('.select2-selection__rendered li').each(function() {
+        var re = /(.*)\s\(.*\)/;
+        var numAccession = $(this).text();
+        numAccession = numAccession.replace(re, '$1');
 
-    $(".select2-selection__rendered li").each(function() {
-        var content = $(this).text();
-
-        if(content !== "") {
-            selectedGenes.push(content.substr(1));
+        if(numAccession !== '') {
+            selectedGenes.push(numAccession.substr(1));
         }
     });
 
-    $(".exons_none, .introns_none, .genes_none").each(function() {
-        var re = /.+\((.+)\)/;
-        var numAccession = $(this).next().text();
-        numAccession = numAccession.replace(re, "$1");
+    updateDataFile(selectedGenes);
+}
 
+function countSelectedGenes() {
+    return $('.select2-selection__rendered li').length;
+}
 
-        if(selectedGenes.indexOf(numAccession) == -1) {
-            $(this).hide();
+function updateDisplayedGenes() {
+    var selectedGenes = [];
+
+    $('.select2-selection__rendered li').each(function() {
+        var re = /(.*)\s\(.*\)/;
+        var numAccession = $(this).text();
+        numAccession = numAccession.replace(re, '$1');
+
+        if(numAccession !== '') {
+            selectedGenes.push(numAccession.substr(1));
         }
     });
 
+    updateDataFile(selectedGenes);
+}
 
+function resetDisplayedGenes() {
+    updateDataFile([]);
+}
+
+function updateDataFile(selectedGenes) {
+    $.ajax({
+            url  : "db/getGenesJSON.php",
+            type : "POST",
+            data : {genes:selectedGenes},
+            dataType : "json",
+
+            success : function(json_result, status) {
+                if(status == "success")
+                {
+                    linearlayout.genomesize = parseInt(json_result.end);
+                    linearlayout.initStart = parseInt(json_result.start);
+                    linearlayout.initEnd = parseInt(json_result.end);
+                    contextLayout.genomesize = parseInt(json_result.end);
+                    linearTrack = new genomeTrack(linearlayout, json_result.tracks);
+
+                    if(brush == undefined) {
+                        brush = new linearBrush(contextLayout,linearTrack);
+                    }
+
+                    linearTrack.addBrushCallback(brush);
+                } else {
+                }
+            },
+
+            error : function(result, status, error) {
+                console.log(result);
+            }
+        });
 }

@@ -8,6 +8,8 @@ var linearTrackDefaults = {
     name: "defaultlinear",
 };
 
+var isFiltering = false;
+
 function genomeTrack(layout,tracks) {
 
     this.tracks = tracks;
@@ -152,6 +154,7 @@ function genomeTrack(layout,tracks) {
 	.offset([-10, 0])
 	.html(function(d) {
 		return "<strong>Name:</strong> <span style='color:red'>" + d.name + "</span><br/>\
+                <strong>N° Accession:</strong> <span style='color:green'>" + d.geneAN + "</span><br/>\
                 <strong>Position:</strong> <span style='color:orange'>" + d.start + " .. " + d.end + "</span>";
 	    });
 
@@ -999,7 +1002,7 @@ genomeTrack.prototype.displayAxis = function() {
 }
 
     genomeTrack.prototype.update = function(startbp, endbp, params) {
-    //    console.log(startbp, endbp);
+        console.log(startbp, endbp);
 
     this.visStart = startbp;
     this.visEnd = endbp;
@@ -1039,8 +1042,6 @@ genomeTrack.prototype.resize = function(newWidth) {
     this.main
 	.attr("width", this.layout.width_without_margins)
 
-    this.redraw();
-
 }
 
 genomeTrack.prototype.dragresize = function(d) {
@@ -1053,7 +1054,6 @@ genomeTrack.prototype.dragresize = function(d) {
 }
 
 genomeTrack.prototype.redraw = function() {
-
     for(var i = 0; i < this.tracks.length; i++) {
 
 	 if("undefined" !== this.tracks[i].skipLinear
@@ -1083,25 +1083,7 @@ genomeTrack.prototype.redraw = function() {
     }
 
     this.axisContainer.select(".xaxislinear").call(this.xAxis);
-    bindEvents();
 }
-
-
-function bindEvents() {
-    $(".genes_none").on("mouseover", function() {
-        console.log("ok");
-        $(".geneComponentsHover").removeClass("geneComponentsHover");
-
-        var numAccession = $(this).next().text();
-
-        $(".exons_text, .introns_text").each(function() {
-            if($(this).text().indexOf(numAccession) >= 0) {
-                $(this).parent().addClass("geneComponentsHover");
-            }
-        });
-    });
-}
-
 
 genomeTrack.prototype.rescale = function() {
     var cfg = this.layout;

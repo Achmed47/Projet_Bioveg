@@ -283,7 +283,11 @@ button.large{
 
 #geneSelectContainer {
     position:relative;
-    left:115px;
+    left:120px;
+}
+
+#geneSelect {
+    max-width:930px;
 }
 
 #loadingGifPrimer {
@@ -303,13 +307,13 @@ button.large{
 
 #linearchart {
     position:relative;
-    left:110px;
+    left:130px;
     top:40px;
 }
 
 #brush {
     position:relative;
-    left:70px;
+    left:90px;
     top:100px;
 }
 
